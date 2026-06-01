@@ -34,6 +34,15 @@ export default function CartDrawer() {
     };
   }, [isCartOpen, setIsCartOpen]);
 
+  // Helper to format currency to Colombian COP
+  const formatCOP = (num: number) => {
+    return new Intl.NumberFormat("es-CO", {
+      style: "currency",
+      currency: "COP",
+      minimumFractionDigits: 0,
+    }).format(num);
+  };
+
   return (
     <AnimatePresence>
       {isCartOpen && (
@@ -60,9 +69,9 @@ export default function CartDrawer() {
             <div className="p-5 border-b border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <ShoppingBag className="w-5 h-5 text-orange-500" />
-                <h2 className="text-lg font-bold text-neutral-900 dark:text-white">Your Order</h2>
+                <h2 className="text-lg font-bold text-neutral-900 dark:text-white">Tu Pedido</h2>
                 <span className="bg-orange-50 dark:bg-orange-950/40 text-orange-600 dark:text-orange-400 text-xs px-2 py-0.5 rounded-full font-semibold">
-                  {totalItems} {totalItems === 1 ? "item" : "items"}
+                  {totalItems} {totalItems === 1 ? "producto" : "productos"}
                 </span>
               </div>
               <button
@@ -86,15 +95,15 @@ export default function CartDrawer() {
                     <div className="w-20 h-20 bg-orange-50 dark:bg-orange-950/20 rounded-full flex items-center justify-center mb-4 text-orange-500 text-3xl">
                       🍔
                     </div>
-                    <h3 className="font-bold text-neutral-800 dark:text-white text-lg">Your cart is empty</h3>
+                    <h3 className="font-bold text-neutral-850 dark:text-white text-lg">Tu carrito está vacío</h3>
                     <p className="text-neutral-500 dark:text-neutral-400 text-sm mt-1 max-w-xs">
-                      Browse our gourmet menu and add your favorite bites!
+                      ¡Explora nuestro menú y añade tus antojos favoritos hoy!
                     </p>
                     <button
                       onClick={() => setIsCartOpen(false)}
                       className="mt-6 px-6 py-2.5 bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold rounded-full shadow-lg hover:shadow-orange-500/20 transition-all text-sm cursor-pointer"
                     >
-                      Start Ordering
+                      Empezar a Ordenar
                     </button>
                   </motion.div>
                 ) : (
@@ -120,7 +129,7 @@ export default function CartDrawer() {
 
                       {/* Content */}
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-semibold text-sm text-neutral-800 dark:text-neutral-200 truncate">
+                        <h4 className="font-semibold text-sm text-neutral-850 dark:text-neutral-200 truncate">
                           {item.title}
                         </h4>
                         <p className="text-xs text-neutral-500 dark:text-neutral-400 line-clamp-1">
@@ -128,7 +137,7 @@ export default function CartDrawer() {
                         </p>
                         <div className="flex items-center justify-between mt-2">
                           <span className="font-bold text-sm text-orange-600 dark:text-orange-400">
-                            ${(item.price * quantity).toFixed(2)}
+                            {formatCOP(item.price * quantity)}
                           </span>
 
                           {/* Quantity Controls */}
@@ -139,7 +148,7 @@ export default function CartDrawer() {
                             >
                               <Minus className="w-3.5 h-3.5" />
                             </button>
-                            <span className="text-xs font-bold w-4 text-center text-neutral-800 dark:text-neutral-200">
+                            <span className="text-xs font-bold w-4 text-center text-neutral-850 dark:text-neutral-200">
                               {quantity}
                             </span>
                             <button
@@ -156,7 +165,7 @@ export default function CartDrawer() {
                       <button
                         onClick={() => removeFromCart(item.id)}
                         className="p-1 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/20 text-neutral-400 hover:text-red-500 transition-colors cursor-pointer"
-                        title="Remove Item"
+                        title="Eliminar producto"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -172,16 +181,16 @@ export default function CartDrawer() {
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm text-neutral-500 dark:text-neutral-400">
                     <span>Subtotal</span>
-                    <span>${totalPrice.toFixed(2)}</span>
+                    <span>{formatCOP(totalPrice)}</span>
                   </div>
                   <div className="flex justify-between text-sm text-neutral-500 dark:text-neutral-400">
-                    <span>Delivery Fee</span>
-                    <span className="text-green-600 font-medium">FREE</span>
+                    <span>Costo de Envío</span>
+                    <span className="text-green-600 font-medium">GRATIS</span>
                   </div>
                   <div className="border-t border-neutral-200/60 dark:border-neutral-800 my-2 pt-2 flex justify-between font-bold text-base text-neutral-900 dark:text-white">
-                    <span>Estimated Total</span>
+                    <span>Total Estimado</span>
                     <span className="text-orange-600 dark:text-orange-400">
-                      ${totalPrice.toFixed(2)}
+                      {formatCOP(totalPrice)}
                     </span>
                   </div>
                 </div>
@@ -190,12 +199,12 @@ export default function CartDrawer() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className="w-full py-3.5 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold rounded-2xl shadow-xl hover:shadow-orange-500/25 transition-all text-center flex items-center justify-center gap-2 cursor-pointer"
-                  onClick={() => alert("🎉 Thank you for checking out! (Mock implementation completed successfully)")}
+                  onClick={() => alert(`🎉 ¡Muchas gracias por tu pedido!\nValor Total: ${formatCOP(totalPrice)}\n(Simulación de compra completada con éxito)`)}
                 >
-                  Place Order • ${(totalPrice).toFixed(2)}
+                  Confirmar Pedido • {formatCOP(totalPrice)}
                 </motion.button>
                 <p className="text-[10px] text-center text-neutral-400 dark:text-neutral-500">
-                  By clicking Place Order you agree to our Terms of Service.
+                  Al confirmar tu pedido aceptas nuestros Términos de Servicio.
                 </p>
               </div>
             )}

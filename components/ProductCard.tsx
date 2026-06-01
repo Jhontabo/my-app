@@ -42,7 +42,7 @@ export default function ProductCard({ item }: ProductCardProps) {
           {item.isPopular ? (
             <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-md flex items-center gap-1">
               <Flame className="w-3 h-3 animate-bounce" />
-              <span>Bestseller</span>
+              <span>Más Vendido</span>
             </div>
           ) : (
             <div />
@@ -85,10 +85,14 @@ export default function ProductCard({ item }: ProductCardProps) {
         <div className="flex items-center justify-between mt-5 pt-3 border-t border-neutral-100/50 dark:border-neutral-800/40">
           <div className="flex flex-col">
             <span className="text-[10px] text-neutral-400 dark:text-neutral-500 font-bold uppercase tracking-wider">
-              Price
+              Precio
             </span>
             <span className="text-xl sm:text-2xl font-black text-neutral-900 dark:text-white tracking-tight">
-              ${item.price.toFixed(2)}
+              {new Intl.NumberFormat("es-CO", {
+                style: "currency",
+                currency: "COP",
+                minimumFractionDigits: 0,
+              }).format(item.price)}
             </span>
           </div>
 

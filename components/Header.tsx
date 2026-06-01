@@ -73,7 +73,7 @@ export default function Header() {
               BITE<span className="text-orange-500">BOX</span>
             </span>
             <span className="text-[10px] text-neutral-400 font-medium tracking-widest uppercase -mt-0.5">
-              Gourmet Fast Food
+              Comida Rápida Gourmet
             </span>
           </div>
         </motion.div>
@@ -81,16 +81,16 @@ export default function Header() {
         {/* Center Navigation - Desktop */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-neutral-600 dark:text-neutral-300">
           <a href="#menu" className="hover:text-orange-500 transition-colors">
-            Menu
+            Menú
           </a>
           <a href="#about" className="hover:text-orange-500 transition-colors">
-            About Us
+            Nosotros
           </a>
           <a href="#reviews" className="hover:text-orange-500 transition-colors">
-            Reviews
+            Reseñas
           </a>
           <a href="#contact" className="hover:text-orange-500 transition-colors">
-            Contact
+            Contacto
           </a>
         </nav>
 

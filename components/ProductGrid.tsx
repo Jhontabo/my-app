@@ -32,7 +32,7 @@ export default function ProductGrid({ activeCategory }: ProductGridProps) {
         </div>
         <input
           type="text"
-          placeholder="Search burgers, pizzas, loaded fries..."
+          placeholder="Buscar hamburguesas, pizzas, papas..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="w-full pl-12 pr-4 py-3.5 bg-neutral-50 dark:bg-neutral-900 border border-neutral-250/70 dark:border-neutral-800 rounded-2xl shadow-sm text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-orange-500/25 focus:border-orange-500 transition-all font-medium"
@@ -42,7 +42,7 @@ export default function ProductGrid({ activeCategory }: ProductGridProps) {
             onClick={() => setSearchQuery("")}
             className="absolute inset-y-0 right-4 flex items-center text-xs text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 cursor-pointer"
           >
-            Clear
+            Limpiar
           </button>
         )}
       </div>
@@ -58,9 +58,9 @@ export default function ProductGrid({ activeCategory }: ProductGridProps) {
               className="flex flex-col items-center justify-center py-20 text-center"
             >
               <span className="text-4xl mb-4">🔍</span>
-              <h3 className="text-lg font-bold text-neutral-800 dark:text-neutral-200">No items match your criteria</h3>
+              <h3 className="text-lg font-bold text-neutral-800 dark:text-neutral-200">No encontramos productos que coincidan</h3>
               <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1 max-w-xs">
-                Try adjusting your search queries or selecting another delicious category!
+                ¡Intenta ajustando tu búsqueda o seleccionando otra deliciosa categoría!
               </p>
             </motion.div>
           ) : (
