@@ -28,7 +28,7 @@ export default function CategorySlider({
             >
               {/* Active Slide-over background bubble */}
               {isActive && (
-                <motion.div
+                <motion.span
                   layoutId="activeCategoryBg"
                   className="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-500 rounded-full shadow-lg shadow-orange-500/20"
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
