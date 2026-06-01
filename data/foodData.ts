@@ -1,0 +1,151 @@
+export interface FoodItem {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  category: string;
+  price: number;
+  rating: number;
+  prepTime: string;
+  calories: number;
+  isPopular?: boolean;
+}
+
+export const CATEGORIES = [
+  { id: "all", name: "All Foods", icon: "✨" },
+  { id: "burgers", name: "Burgers", icon: "🍔" },
+  { id: "pizza", name: "Pizza", icon: "🍕" },
+  { id: "hotdogs", name: "Hot Dogs", icon: "🌭" },
+  { id: "fries", name: "Fries", icon: "🍟" },
+  { id: "combos", name: "Combos", icon: "🍱" },
+  { id: "drinks", name: "Drinks", icon: "🥤" },
+];
+
+export const FOOD_ITEMS: FoodItem[] = [
+  {
+    id: "b1",
+    title: "Truffle Umami Smash",
+    description: "Double smashed premium Angus beef, melted Swiss cheese, caramelized onions, and house truffle aioli on a toasted brioche bun.",
+    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80",
+    category: "burgers",
+    price: 14.99,
+    rating: 4.9,
+    prepTime: "12-15 min",
+    calories: 780,
+    isPopular: true,
+  },
+  {
+    id: "b2",
+    title: "Double Smokehouse Bacon",
+    description: "Two flame-grilled beef patties, crispy hickory-smoked bacon, sharp cheddar, onion rings, and a smoky bourbon BBQ sauce.",
+    image: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&auto=format&fit=crop&q=80",
+    category: "burgers",
+    price: 15.49,
+    rating: 4.8,
+    prepTime: "15 min",
+    calories: 920,
+    isPopular: true,
+  },
+  {
+    id: "b3",
+    title: "Hot Honey Crispy Chicken",
+    description: "Crispy buttermilk fried chicken breast, drizzled with hot honey, spicy slaw, pickles, and garlic mayo on a toasted bun.",
+    image: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?w=600&auto=format&fit=crop&q=80",
+    category: "burgers",
+    price: 13.99,
+    rating: 4.7,
+    prepTime: "10-12 min",
+    calories: 690,
+  },
+  {
+    id: "p1",
+    title: "Gourmet Pepperoni & Hot Honey",
+    description: "Sourdough crust, premium pepperoni, fresh mozzarella, spicy salami, red chili flakes, and a hot honey drizzle.",
+    image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&auto=format&fit=crop&q=80",
+    category: "pizza",
+    price: 18.99,
+    rating: 4.9,
+    prepTime: "18-20 min",
+    calories: 1100,
+    isPopular: true,
+  },
+  {
+    id: "p2",
+    title: "Truffle Mushroom Pizza",
+    description: "Creamy white sauce base, wild mushrooms, fresh mozzarella, truffle oil, arugula, and shaved parmesan.",
+    image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600&auto=format&fit=crop&q=80",
+    category: "pizza",
+    price: 19.49,
+    rating: 4.6,
+    prepTime: "18 min",
+    calories: 980,
+  },
+  {
+    id: "h1",
+    title: "Chili Cheese Master Dog",
+    description: "Premium beef sausage in a warm bun, loaded with house beef chili, cheddar cheese sauce, jalapeños, and crispy onions.",
+    image: "https://images.unsplash.com/photo-1619740455993-9e612b1af08a?w=600&auto=format&fit=crop&q=80",
+    category: "hotdogs",
+    price: 9.99,
+    rating: 4.5,
+    prepTime: "8-10 min",
+    calories: 620,
+  },
+  {
+    id: "f1",
+    title: "Loaded Maple Bacon Fries",
+    description: "Crisp golden fries tossed in sea salt, smothered in warm cheese sauce, maple bacon bits, and chopped chives.",
+    image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&auto=format&fit=crop&q=80",
+    category: "fries",
+    price: 7.99,
+    rating: 4.8,
+    prepTime: "8 min",
+    calories: 550,
+    isPopular: true,
+  },
+  {
+    id: "f2",
+    title: "Truffle Parmesan Fries",
+    description: "Crispy thin-cut fries tossed with real black truffle oil, freshly grated parmesan cheese, and fresh parsley.",
+    image: "https://images.unsplash.com/photo-1576107232684-1279f390859f?w=600&auto=format&fit=crop&q=80",
+    category: "fries",
+    price: 8.49,
+    rating: 4.7,
+    prepTime: "7 min",
+    calories: 480,
+  },
+  {
+    id: "c1",
+    title: "The Ultimate Feast Combo",
+    description: "Our signature Truffle Smash Burger, a side of Loaded Maple Bacon Fries, and an ice-cold signature Lemonade.",
+    image: "https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=600&auto=format&fit=crop&q=80",
+    category: "combos",
+    price: 22.99,
+    rating: 4.9,
+    prepTime: "15 min",
+    calories: 1450,
+    isPopular: true,
+  },
+  {
+    id: "d1",
+    title: "Artisanal Strawberry Lemonade",
+    description: "Freshly squeezed lemon juice, organic strawberries, sparkling water, and fresh mint leaves over crushed ice.",
+    image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=600&auto=format&fit=crop&q=80",
+    category: "drinks",
+    price: 4.99,
+    rating: 4.8,
+    prepTime: "3-5 min",
+    calories: 120,
+  },
+  {
+    id: "d2",
+    title: "Signature Cold Brew Shake",
+    description: "Creamy vanilla gelato blended with organic cold brew coffee, topped with whipped cream and cocoa powder.",
+    image: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=600&auto=format&fit=crop&q=80",
+    category: "drinks",
+    price: 5.99,
+    rating: 4.7,
+    prepTime: "5 min",
+    calories: 380,
+  },
+];
