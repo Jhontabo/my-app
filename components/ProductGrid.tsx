@@ -1,6 +1,7 @@
 "use client";
 
-import { FoodItem, FOOD_ITEMS } from "@/data/foodData";
+import { FoodItem } from "@/data/foodData";
+import { useMenu } from "@/context/MenuContext";
 import ProductCard from "./ProductCard";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, ShoppingBag } from "lucide-react";
@@ -11,10 +12,11 @@ interface ProductGridProps {
 }
 
 export default function ProductGrid({ activeCategory }: ProductGridProps) {
+  const { menu } = useMenu();
   const [searchQuery, setSearchQuery] = useState("");
 
   // Filter items based on active category AND search query
-  const filteredItems = FOOD_ITEMS.filter((item) => {
+  const filteredItems = menu.filter((item) => {
     const matchesCategory = activeCategory === "all" || item.category === activeCategory;
     const matchesSearch =
       item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||

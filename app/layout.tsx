@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { MenuProvider } from "@/context/MenuContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,7 +33,7 @@ export default function RootLayout({
         className="min-h-full flex flex-col bg-zinc-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-50 transition-colors duration-300"
         suppressHydrationWarning
       >
-        {children}
+        <MenuProvider>{children}</MenuProvider>
       </body>
     </html>
   );

@@ -3,6 +3,7 @@
 import { Flame, Moon, Sun, Menu } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function Header() {
   const [darkMode, setDarkMode] = useState(false);
@@ -78,9 +79,12 @@ export default function Header() {
 
         {/* Center Navigation - Desktop */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-neutral-600 dark:text-neutral-300">
-          <a href="#menu" className="hover:text-orange-500 transition-colors">
+          <a href="/#menu" className="hover:text-orange-500 transition-colors">
             Menú
           </a>
+          <Link href="/admin" className="hover:text-orange-500 transition-colors">
+            Administrar
+          </Link>
           <a href="#about" className="hover:text-orange-500 transition-colors">
             Nosotros
           </a>
