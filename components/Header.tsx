@@ -1,12 +1,10 @@
 "use client";
 
-import { useCart } from "@/context/CartContext";
-import { ShoppingCart, Flame, Moon, Sun, Menu } from "lucide-react";
+import { Flame, Moon, Sun, Menu } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 export default function Header() {
-  const { totalItems, setIsCartOpen } = useCart();
   const [darkMode, setDarkMode] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -105,24 +103,7 @@ export default function Header() {
             {darkMode ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5" />}
           </button>
 
-          {/* Cart Icon (Trigger) */}
-          <button
-            onClick={() => setIsCartOpen(true)}
-            className="relative p-2.5 rounded-full hover:bg-orange-50 dark:hover:bg-orange-950/20 text-neutral-700 dark:text-neutral-200 transition-all cursor-pointer group"
-            aria-label="Open cart"
-          >
-            <ShoppingCart className="w-5.5 h-5.5 group-hover:scale-105 transition-transform" />
-            
-            {totalItems > 0 && (
-              <motion.span
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                className="absolute top-1 right-1 flex items-center justify-center w-5 h-5 text-[10px] font-black text-white bg-gradient-to-r from-orange-500 to-red-500 rounded-full shadow-sm"
-              >
-                {totalItems}
-              </motion.span>
-            )}
-          </button>
+
 
           {/* Mobile Menu Icon */}
           <button

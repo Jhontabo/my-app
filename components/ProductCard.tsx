@@ -1,8 +1,7 @@
 "use client";
 
 import { FoodItem } from "@/data/foodData";
-import { useCart } from "@/context/CartContext";
-import { Plus, Star, Clock, Flame } from "lucide-react";
+import { Star, Clock, Flame } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -11,7 +10,6 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ item }: ProductCardProps) {
-  const { addToCart } = useCart();
 
   return (
     <motion.div
@@ -96,16 +94,10 @@ export default function ProductCard({ item }: ProductCardProps) {
             </span>
           </div>
 
-          {/* Interactive Floating Add to Cart Button */}
-          <motion.button
-            onClick={() => addToCart(item)}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-2xl shadow-md hover:shadow-orange-500/25 cursor-pointer"
-            aria-label={`Add ${item.title} to cart`}
-          >
-            <Plus className="w-5 h-5 font-bold" />
-          </motion.button>
+          {/* Consumo Local Label */}
+          <div className="text-xs font-bold text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-950/20 px-3 py-1.5 rounded-xl border border-orange-100/10">
+            Servido al instante
+          </div>
         </div>
       </div>
     </motion.div>

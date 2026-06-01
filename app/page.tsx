@@ -6,8 +6,6 @@ import HeroSection from "@/components/HeroSection";
 import CategorySlider from "@/components/CategorySlider";
 import ProductGrid from "@/components/ProductGrid";
 import SectionTitle from "@/components/SectionTitle";
-import CartButton from "@/components/CartButton";
-import CartDrawer from "@/components/CartDrawer";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -73,12 +71,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-
-      {/* Botón Flotante del Carrito */}
-      <CartButton />
-
-      {/* Panel Desplizable del Pedido (Cart Drawer) */}
-      <CartDrawer />
     </div>
   );
 }

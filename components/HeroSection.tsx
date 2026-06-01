@@ -1,14 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useCart } from "@/context/CartContext";
 import { FOOD_ITEMS, FoodItem } from "@/data/foodData";
-import { ArrowRight, Star, Clock, Flame, ChevronLeft, ChevronRight, ShoppingCart } from "lucide-react";
+import { ArrowRight, Star, Clock, Flame, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 export default function HeroSection() {
-  const { addToCart } = useCart();
   
   // Filter featured items for the recommended carousel
   const featuredItems = FOOD_ITEMS.filter((item) => item.isFeatured);
@@ -237,20 +235,15 @@ export default function HeroSection() {
                         </p>
                       </div>
 
-                      {/* Add to Cart Directly from Carousel */}
+                      {/* Precio y Tiempo de Preparación */}
                       <div className="flex items-center justify-between pt-3 border-t border-neutral-100/50 dark:border-neutral-800/40">
                         <span className="text-xl sm:text-2xl font-black text-neutral-900 dark:text-white tracking-tight">
                           {formatCOP(currentItem.price)}
                         </span>
-                        <motion.button
-                          onClick={() => addToCart(currentItem)}
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-bold rounded-xl shadow-md hover:shadow-orange-500/20 cursor-pointer"
-                        >
-                          <ShoppingCart className="w-3.5 h-3.5" />
-                          <span>Agregar</span>
-                        </motion.button>
+                        <div className="flex items-center gap-1.5 px-3.5 py-1.5 bg-orange-50 dark:bg-orange-950/20 text-orange-600 dark:text-orange-400 text-xs font-bold rounded-xl shadow-sm border border-orange-100/30">
+                          <Clock className="w-4 h-4" />
+                          <span>{currentItem.prepTime}</span>
+                        </div>
                       </div>
 
                     </div>
