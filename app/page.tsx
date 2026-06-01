@@ -8,7 +8,6 @@ import ProductGrid from "@/components/ProductGrid";
 import SectionTitle from "@/components/SectionTitle";
 import CartButton from "@/components/CartButton";
 import CartDrawer from "@/components/CartDrawer";
-import { ShieldCheck, Truck, Utensils } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -43,53 +42,6 @@ export default function Home() {
 
           {/* Grilla Filtable e Interactiva con Buscador */}
           <ProductGrid activeCategory={activeCategory} />
-        </section>
-
-        {/* Sección de Propuesta de Valor y Características */}
-        <section className="py-8 border-t border-neutral-200/50 dark:border-neutral-800/40">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Característica 1 */}
-            <motion.div
-              whileHover={{ y: -5 }}
-              className="p-6 bg-white dark:bg-neutral-900 rounded-3xl border border-neutral-100 dark:border-neutral-800 shadow-sm space-y-4"
-            >
-              <div className="w-12 h-12 bg-orange-50 dark:bg-orange-950/20 text-orange-500 rounded-2xl flex items-center justify-center">
-                <Utensils className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold text-neutral-900 dark:text-white">Calidad 100% Artesanal</h3>
-              <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
-                Molemos nuestra carne premium Angus a diario. Usamos quesos reales fundidos y panes brioche horneados cada mañana.
-              </p>
-            </motion.div>
-
-            {/* Característica 2 */}
-            <motion.div
-              whileHover={{ y: -5 }}
-              className="p-6 bg-white dark:bg-neutral-900 rounded-3xl border border-neutral-100 dark:border-neutral-800 shadow-sm space-y-4"
-            >
-              <div className="w-12 h-12 bg-orange-50 dark:bg-orange-950/20 text-orange-500 rounded-2xl flex items-center justify-center">
-                <Truck className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold text-neutral-900 dark:text-white">Envío Súper Rápido</h3>
-              <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
-                Gracias a nuestro modelo de cocinas de despacho local, garantizamos que tus hamburguesas y papas rústicas lleguen calientes en tiempo récord.
-              </p>
-            </motion.div>
-
-            {/* Característica 3 */}
-            <motion.div
-              whileHover={{ y: -5 }}
-              className="p-6 bg-white dark:bg-neutral-900 rounded-3xl border border-neutral-100 dark:border-neutral-800 shadow-sm space-y-4"
-            >
-              <div className="w-12 h-12 bg-orange-50 dark:bg-orange-950/20 text-orange-500 rounded-2xl flex items-center justify-center">
-                <ShieldCheck className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold text-neutral-900 dark:text-white">Seguridad e Inocuidad</h3>
-              <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
-                Toda nuestra comida se prepara bajo rigurosos protocolos de bioseguridad e higiene, y se sella en empaques térmicos ecológicos.
-              </p>
-            </motion.div>
-          </div>
         </section>
 
       </main>
