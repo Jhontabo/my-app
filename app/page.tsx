@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Header from "@/components/Header";
-import HeroSection from "@/components/HeroSection";
 import CategorySlider from "@/components/CategorySlider";
 import ProductGrid from "@/components/ProductGrid";
 import SectionTitle from "@/components/SectionTitle";
@@ -16,11 +15,8 @@ export default function Home() {
       {/* Cabecera Premium Sticky */}
       <Header />
 
-      {/* Sección Hero con Carrusel de Recomendados */}
-      <HeroSection />
-
       {/* Cuerpo de Contenido Principal */}
-      <main className="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 md:py-20 space-y-24">
+      <main className="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-12 pb-16 sm:pt-16 sm:pb-24 space-y-16">
         
         {/* Sección de Menú de Comidas */}
         <section className="space-y-8 scroll-mt-24">
