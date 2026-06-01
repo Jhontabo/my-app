@@ -9,7 +9,7 @@ export interface FoodItem {
   prepTime: string;
   calories: number;
   isPopular?: boolean;
-  isFeatured?: boolean; // For the top recommended carousel
+  isFeatured?: boolean; // For reference
 }
 
 export const CATEGORIES = [
@@ -23,13 +23,14 @@ export const CATEGORIES = [
 ];
 
 export const FOOD_ITEMS: FoodItem[] = [
+  // --- HAMBURGUESAS ---
   {
     id: "b1",
     title: "Truffle Umami Smash",
     description: "Doble carne premium de res Angus smash, queso suizo fundido, cebolla caramelizada y nuestra salsa alioli de trufa en pan brioche artesanal.",
     image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80",
     category: "burgers",
-    price: 34900, // COP format
+    price: 34900,
     rating: 4.9,
     prepTime: "12-15 min",
     calories: 780,
@@ -61,6 +62,31 @@ export const FOOD_ITEMS: FoodItem[] = [
     calories: 690,
   },
   {
+    id: "b4",
+    title: "Blue Cheese & Higo Gourmet",
+    description: "Carne Angus premium, queso azul maduro desmenuzado, mermelada artesanal de higos, rúgula fresca y cebollas crujientes en pan brioche.",
+    image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=600&auto=format&fit=crop&q=80",
+    category: "burgers",
+    price: 32900,
+    rating: 4.8,
+    prepTime: "12 min",
+    calories: 810,
+    isPopular: true,
+  },
+  {
+    id: "b5",
+    title: "Avocado Pepper Jack Smash",
+    description: "Doble carne de res smash, queso Pepper Jack picante, guacamole rústico casero, jalapeños encurtidos y mayonesa de cilantro y lima.",
+    image: "https://images.unsplash.com/photo-1525059696034-4967a8e1dca2?w=600&auto=format&fit=crop&q=80",
+    category: "burgers",
+    price: 35900,
+    rating: 4.7,
+    prepTime: "12-14 min",
+    calories: 850,
+  },
+
+  // --- PIZZAS ---
+  {
     id: "p1",
     title: "Pepperoni & Hot Honey",
     description: "Masa madre madurada 48 horas, pepperoni premium, queso mozzarella fresco, salami picante, hojuelas de chile rojo y un toque de miel picante.",
@@ -85,6 +111,31 @@ export const FOOD_ITEMS: FoodItem[] = [
     calories: 980,
   },
   {
+    id: "p3",
+    title: "Burrata & Prosciutto Crudo",
+    description: "Masa madre crocante, salsa de tomate San Marzano, láminas delgadas de jamón serrano prosciutto di Parma, bola de burrata cremosa y albahaca fresca.",
+    image: "https://images.unsplash.com/photo-1544982503-9f984c14501a?w=600&auto=format&fit=crop&q=80",
+    category: "pizza",
+    price: 45900,
+    rating: 4.9,
+    prepTime: "20 min",
+    calories: 1250,
+    isPopular: true,
+  },
+  {
+    id: "p4",
+    title: "Cuatro Quesos Picante",
+    description: "Deliciosa mezcla de mozzarella fresca, queso gorgonzola, parmesano madurado y ricota cremosa, aderezada con aceite picante infusionado.",
+    image: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=600&auto=format&fit=crop&q=80",
+    category: "pizza",
+    price: 41900,
+    rating: 4.8,
+    prepTime: "18 min",
+    calories: 1180,
+  },
+
+  // --- PERROS CALIENTES ---
+  {
     id: "h1",
     title: "Chili Cheese Master Dog",
     description: "Salchicha alemana de res premium en pan suave, cargada con chili con carne casero, salsa cheddar caliente, jalapeños y cebollita crujiente.",
@@ -95,6 +146,31 @@ export const FOOD_ITEMS: FoodItem[] = [
     prepTime: "8-10 min",
     calories: 620,
   },
+  {
+    id: "h2",
+    title: "Classic New York Dog",
+    description: "Salchicha premium de res, chucrut tradicional (sauerkraut), mostaza marrón picante y relish dulce en pan de perro brioche tostado.",
+    image: "https://images.unsplash.com/photo-1627059313773-ac224e8dec4a?w=600&auto=format&fit=crop&q=80",
+    category: "hotdogs",
+    price: 19900,
+    rating: 4.4,
+    prepTime: "8 min",
+    calories: 510,
+  },
+  {
+    id: "h3",
+    title: "Bacon Avocado Loaded Dog",
+    description: "Salchicha envuelta en tocineta crujiente, puré de aguacate, pico de gallo fresco, cebolla caramelizada y un toque de alioli de chipotle.",
+    image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=600&auto=format&fit=crop&q=80",
+    category: "hotdogs",
+    price: 25900,
+    rating: 4.7,
+    prepTime: "10 min",
+    calories: 730,
+    isPopular: true,
+  },
+
+  // --- ACOMPAÑAMIENTOS ---
   {
     id: "f1",
     title: "Papas Maple Bacon",
@@ -120,6 +196,31 @@ export const FOOD_ITEMS: FoodItem[] = [
     calories: 480,
   },
   {
+    id: "f3",
+    title: "Camotes Crujientes Trufados",
+    description: "Bastones crujientes de camote (sweet potato fries) salpimentados, rociados con aceite de trufa blanca, sal de mar y romero fresco picado.",
+    image: "https://images.unsplash.com/photo-1585109649139-366815a0d713?w=600&auto=format&fit=crop&q=80",
+    category: "fries",
+    price: 17900,
+    rating: 4.6,
+    prepTime: "7-8 min",
+    calories: 440,
+  },
+  {
+    id: "f4",
+    title: "Papas con Pulled Pork BBQ",
+    description: "Papas rústicas doradas cargadas con carne de cerdo desmechada ahumada en roble, bañada en salsa BBQ, queso cheddar fundido y pepinillos.",
+    image: "https://images.unsplash.com/photo-1618040996337-56904b7850b9?w=600&auto=format&fit=crop&q=80",
+    category: "fries",
+    price: 22900,
+    rating: 4.8,
+    prepTime: "10 min",
+    calories: 680,
+    isPopular: true,
+  },
+
+  // --- COMBOS ---
+  {
     id: "c1",
     title: "Combo Mega Fiesta",
     description: "Nuestra hamburguesa insignia Truffle Smash, una porción de Papas Rústicas Maple Bacon y una Limonada de Cereza bien fría.",
@@ -131,6 +232,31 @@ export const FOOD_ITEMS: FoodItem[] = [
     calories: 1450,
     isPopular: true,
   },
+  {
+    id: "c2",
+    title: "Combo Gourmet en Pareja",
+    description: "Una Pizza Burrata & Prosciutto Crudo, una porción de Papas Trufa & Parmesano, y dos bebidas artesanales a elección.",
+    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&auto=format&fit=crop&q=80",
+    category: "combos",
+    price: 64900,
+    rating: 4.9,
+    prepTime: "20 min",
+    calories: 2100,
+    isPopular: true,
+  },
+  {
+    id: "c3",
+    title: "Combo Mini Explorador",
+    description: "Mini hamburguesa clásica de carne Angus (sencilla con queso), papas francesas pequeñas y una cajita de jugo de manzana orgánico.",
+    image: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&auto=format&fit=crop&q=80",
+    category: "combos",
+    price: 24900,
+    rating: 4.6,
+    prepTime: "10 min",
+    calories: 610,
+  },
+
+  // --- BEBIDAS ---
   {
     id: "d1",
     title: "Limonada de Cereza Artesanal",
@@ -152,5 +278,28 @@ export const FOOD_ITEMS: FoodItem[] = [
     rating: 4.7,
     prepTime: "5 min",
     calories: 380,
+  },
+  {
+    id: "d3",
+    title: "Limonada de Coco Imperial",
+    description: "Zumo de limón fresco licuado con crema de coco de la casa, leche condensada, endulzado al gusto y servido bien frío con menta.",
+    image: "https://images.unsplash.com/photo-1546173159-315724a91696?w=600&auto=format&fit=crop&q=80",
+    category: "drinks",
+    price: 12900,
+    rating: 4.9,
+    prepTime: "4 min",
+    calories: 290,
+    isPopular: true,
+  },
+  {
+    id: "d4",
+    title: "Soda de Mango & Jengibre",
+    description: "Soda artesanal gasificada con jarabe natural de mango biche, extracto de jengibre fresco picante y borde decorado con Tajín.",
+    image: "https://images.unsplash.com/photo-1497534446932-c925b458314e?w=600&auto=format&fit=crop&q=80",
+    category: "drinks",
+    price: 10900,
+    rating: 4.6,
+    prepTime: "3 min",
+    calories: 150,
   },
 ];
