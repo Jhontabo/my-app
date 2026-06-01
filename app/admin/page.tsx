@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useMenu } from "@/context/MenuContext";
 import { FoodItem, CATEGORIES } from "@/data/foodData";
-import { Plus, Edit2, Trash2, ArrowLeft, RotateCcw, X, Check, Eye } from "lucide-react";
+import { Plus, Edit2, Trash2, ArrowLeft, RotateCcw, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -511,7 +511,7 @@ export default function AdminPage() {
                     htmlFor="isPopular"
                     className="text-sm font-semibold text-neutral-750 dark:text-neutral-200 select-none cursor-pointer"
                   >
-                    🔥 Marcar como plato popular ("Más Vendido")
+                    🔥 Marcar como plato popular (&ldquo;Más Vendido&rdquo;)
                   </label>
                 </div>
 

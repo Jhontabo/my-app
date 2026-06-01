@@ -1,10 +1,9 @@
 "use client";
 
-import { FoodItem } from "@/data/foodData";
 import { useMenu } from "@/context/MenuContext";
 import ProductCard from "./ProductCard";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ShoppingBag } from "lucide-react";
+import { Search } from "lucide-react";
 import { useState } from "react";
 
 interface ProductGridProps {

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { FoodItem, FOOD_ITEMS } from "@/data/foodData";
 
 interface MenuContextType {
@@ -14,24 +14,20 @@ interface MenuContextType {
 const MenuContext = createContext<MenuContextType | undefined>(undefined);
 
 export function MenuProvider({ children }: { children: React.ReactNode }) {
-  const [menu, setMenu] = useState<FoodItem[]>([]);
-
-  // Load menu from localStorage on mount
-  useEffect(() => {
-    const savedMenu = localStorage.getItem("bitebox_menu");
-    if (savedMenu) {
-      try {
-        setMenu(JSON.parse(savedMenu));
-      } catch (e) {
-        console.error("Failed to parse local menu data", e);
-        setMenu(FOOD_ITEMS);
+  const [menu, setMenu] = useState<FoodItem[]>(() => {
+    if (typeof window !== "undefined") {
+      const savedMenu = localStorage.getItem("bitebox_menu");
+      if (savedMenu) {
+        try {
+          return JSON.parse(savedMenu);
+        } catch (e) {
+          console.error("Failed to parse local menu data", e);
+        }
       }
-    } else {
-      // Initialize with default gourmet menu
-      setMenu(FOOD_ITEMS);
       localStorage.setItem("bitebox_menu", JSON.stringify(FOOD_ITEMS));
     }
-  }, []);
+    return FOOD_ITEMS;
+  });
 
   // Save menu to localStorage on state changes
   const saveMenu = (newMenu: FoodItem[]) => {

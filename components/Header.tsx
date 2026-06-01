@@ -6,21 +6,19 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function Header() {
-  const [darkMode, setDarkMode] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  // Initialize theme from localStorage/system preference
-  useEffect(() => {
-    const isDark =
-      localStorage.getItem("theme") === "dark" ||
-      (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches);
-    setDarkMode(isDark);
-    if (isDark) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      const isDark =
+        localStorage.getItem("theme") === "dark" ||
+        (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches);
+      if (isDark) {
+        document.documentElement.classList.add("dark");
+      }
+      return isDark;
     }
-  }, []);
+    return false;
+  });
+  const [scrolled, setScrolled] = useState(false);
 
   // Monitor scroll for header background styling
   useEffect(() => {
@@ -79,9 +77,9 @@ export default function Header() {
 
         {/* Center Navigation - Desktop */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-neutral-600 dark:text-neutral-300">
-          <a href="/#menu" className="hover:text-orange-500 transition-colors">
+          <Link href="/#menu" className="hover:text-orange-500 transition-colors">
             Menú
-          </a>
+          </Link>
           <Link href="/admin" className="hover:text-orange-500 transition-colors">
             Administrar
           </Link>

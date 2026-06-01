@@ -5,7 +5,6 @@ import Header from "@/components/Header";
 import CategorySlider from "@/components/CategorySlider";
 import ProductGrid from "@/components/ProductGrid";
 import SectionTitle from "@/components/SectionTitle";
-import { motion } from "framer-motion";
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState("all");
