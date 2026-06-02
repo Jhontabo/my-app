@@ -1,7 +1,7 @@
 "use client";
 
 import { FoodItem } from "@/data/foodData";
-import { Star, Clock, Flame } from "lucide-react";
+import { Clock, Flame } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -46,22 +46,15 @@ export default function ProductCard({ item }: ProductCardProps) {
             <div />
           )}
 
-          {/* Calorie Indicator */}
-          <div className="bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-md">
-            {item.calories} kcal
-          </div>
+
         </div>
       </div>
 
       {/* Product Content Details */}
       <div className="p-5 flex-1 flex flex-col justify-between">
         <div className="space-y-2">
-          {/* Metadata: Ratings and Prep Time */}
-          <div className="flex items-center gap-3 text-xs text-neutral-500 dark:text-neutral-400 font-semibold">
-            <span className="flex items-center gap-1 bg-amber-50 dark:bg-amber-950/20 text-amber-600 dark:text-amber-400 px-2 py-0.5 rounded-full">
-              <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
-              {item.rating.toFixed(1)}
-            </span>
+          {/* Prep Time */}
+          <div className="flex items-center gap-1 text-xs text-neutral-500 dark:text-neutral-400 font-semibold">
             <span className="flex items-center gap-1 bg-neutral-50 dark:bg-neutral-800 px-2 py-0.5 rounded-full">
               <Clock className="w-3.5 h-3.5 text-neutral-400" />
               {item.prepTime}

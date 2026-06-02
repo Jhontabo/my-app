@@ -25,9 +25,7 @@ export default function AdminPage() {
     image: "",
     category: "burgers",
     price: 0,
-    rating: 4.8,
     prepTime: "12-15 min",
-    calories: 600,
     isPopular: false,
   });
 
@@ -37,7 +35,7 @@ export default function AdminPage() {
       const checked = (e.target as HTMLInputElement).checked;
       setFormData((prev) => ({ ...prev, [name]: checked }));
     } else {
-      setFormData((prev) => ({ ...prev, [name]: name === "price" || name === "calories" || name === "rating" ? Number(value) : value }));
+      setFormData((prev) => ({ ...prev, [name]: name === "price" ? Number(value) : value }));
     }
   };
 
@@ -48,9 +46,7 @@ export default function AdminPage() {
       image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80",
       category: "burgers",
       price: 25000,
-      rating: 4.8,
       prepTime: "10-12 min",
-      calories: 550,
       isPopular: false,
     });
     setIsAddModalOpen(true);
@@ -64,9 +60,7 @@ export default function AdminPage() {
       image: item.image,
       category: item.category,
       price: item.price,
-      rating: item.rating,
       prepTime: item.prepTime,
-      calories: item.calories,
       isPopular: !!item.isPopular,
     });
   };
@@ -241,7 +235,7 @@ export default function AdminPage() {
                   <th scope="col" className="px-6 py-4">Plato / Descripción</th>
                   <th scope="col" className="px-6 py-4">Categoría</th>
                   <th scope="col" className="px-6 py-4">Precio COP</th>
-                  <th scope="col" className="px-6 py-4">Valores (Cal. / Prep)</th>
+                  <th scope="col" className="px-6 py-4">Tiempo Prep.</th>
                   <th scope="col" className="px-6 py-4 text-right">Acciones</th>
                 </tr>
               </thead>
@@ -254,10 +248,10 @@ export default function AdminPage() {
                   </tr>
                 ) : (
                   filteredItems.map((item) => (
-                    <tr key={item.id} className="hover:bg-neutral-50/50 dark:hover:bg-neutral-850/20 transition-colors">
+                    <tr key={item.id} className="">
                       {/* Image + Title */}
                       <td className="px-6 py-4 flex gap-4 items-center min-w-[300px]">
-                        <div className="relative w-12 h-12 rounded-xl overflow-hidden bg-neutral-100 flex-shrink-0 border border-neutral-200/20 shadow-sm">
+                        <div className="relative w-12 h-12 rounded-xl overflow-hidden flex-shrink-0 ring-1 ring-neutral-200/60 dark:ring-neutral-700/60 shadow-sm">
                           <Image
                             src={item.image}
                             alt={item.title}
@@ -295,13 +289,9 @@ export default function AdminPage() {
                         {formatCOP(item.price)}
                       </td>
 
-                      {/* Cal & Prep */}
+                      {/* Prep Time */}
                       <td className="px-6 py-4 text-xs font-medium text-neutral-400 dark:text-neutral-500">
-                        <div className="flex flex-col gap-0.5">
-                          <span>⏱️ {item.prepTime}</span>
-                          <span>🔥 {item.calories} kcal</span>
-                          <span>★ {item.rating.toFixed(1)}</span>
-                        </div>
+                        <span>⏱️ {item.prepTime}</span>
                       </td>
 
                       {/* Actions */}
@@ -429,7 +419,7 @@ export default function AdminPage() {
                   />
                 </div>
 
-                {/* Price and Rating Row */}
+                {/* Price and PrepTime Row */}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
                     <label className="text-xs font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider">
@@ -447,25 +437,6 @@ export default function AdminPage() {
                   </div>
                   <div className="flex flex-col gap-1.5">
                     <label className="text-xs font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider">
-                      Calificación Promedio (1 a 5)
-                    </label>
-                    <input
-                      type="number"
-                      name="rating"
-                      step="0.1"
-                      min={1}
-                      max={5}
-                      value={formData.rating}
-                      onChange={handleInputChange}
-                      className="px-4 py-3 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors min-h-[44px]"
-                    />
-                  </div>
-                </div>
-
-                {/* Calories and PrepTime Row */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider">
                       Preparación (minutos)
                     </label>
                     <input
@@ -474,19 +445,6 @@ export default function AdminPage() {
                       value={formData.prepTime}
                       onChange={handleInputChange}
                       placeholder="Ej. 12-15 min"
-                      className="px-4 py-3 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors min-h-[44px]"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider">
-                      Calorías (kcal)
-                    </label>
-                    <input
-                      type="number"
-                      name="calories"
-                      min={0}
-                      value={formData.calories}
-                      onChange={handleInputChange}
                       className="px-4 py-3 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors min-h-[44px]"
                     />
                   </div>

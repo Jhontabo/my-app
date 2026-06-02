@@ -5,9 +5,7 @@ export interface FoodItem {
   image: string;
   category: string;
   price: number;
-  rating: number;
   prepTime: string;
-  calories: number;
   isPopular?: boolean;
   isFeatured?: boolean; // For reference
 }
@@ -31,9 +29,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80",
     category: "burgers",
     price: 34900,
-    rating: 4.9,
     prepTime: "12-15 min",
-    calories: 780,
     isPopular: true,
     isFeatured: true,
   },
@@ -44,9 +40,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&auto=format&fit=crop&q=80",
     category: "burgers",
     price: 36900,
-    rating: 4.8,
     prepTime: "15 min",
-    calories: 920,
     isPopular: true,
     isFeatured: true,
   },
@@ -57,9 +51,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?w=600&auto=format&fit=crop&q=80",
     category: "burgers",
     price: 29900,
-    rating: 4.7,
     prepTime: "10-12 min",
-    calories: 690,
   },
   {
     id: "b4",
@@ -68,9 +60,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=600&auto=format&fit=crop&q=80",
     category: "burgers",
     price: 32900,
-    rating: 4.8,
     prepTime: "12 min",
-    calories: 810,
     isPopular: true,
   },
   {
@@ -80,9 +70,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1525059696034-4967a8e1dca2?w=600&auto=format&fit=crop&q=80",
     category: "burgers",
     price: 35900,
-    rating: 4.7,
     prepTime: "12-14 min",
-    calories: 850,
   },
 
   // --- PIZZAS ---
@@ -93,9 +81,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&auto=format&fit=crop&q=80",
     category: "pizza",
     price: 38900,
-    rating: 4.9,
     prepTime: "18-20 min",
-    calories: 1100,
     isPopular: true,
     isFeatured: true,
   },
@@ -106,9 +92,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600&auto=format&fit=crop&q=80",
     category: "pizza",
     price: 39900,
-    rating: 4.6,
     prepTime: "18 min",
-    calories: 980,
   },
   {
     id: "p3",
@@ -117,9 +101,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1544982503-9f984c14501a?w=600&auto=format&fit=crop&q=80",
     category: "pizza",
     price: 45900,
-    rating: 4.9,
     prepTime: "20 min",
-    calories: 1250,
     isPopular: true,
   },
   {
@@ -129,9 +111,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=600&auto=format&fit=crop&q=80",
     category: "pizza",
     price: 41900,
-    rating: 4.8,
     prepTime: "18 min",
-    calories: 1180,
   },
 
   // --- PERROS CALIENTES ---
@@ -142,9 +122,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1619740455993-9e612b1af08a?w=600&auto=format&fit=crop&q=80",
     category: "hotdogs",
     price: 24900,
-    rating: 4.5,
     prepTime: "8-10 min",
-    calories: 620,
   },
   {
     id: "h2",
@@ -153,9 +131,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1627059313773-ac224e8dec4a?w=600&auto=format&fit=crop&q=80",
     category: "hotdogs",
     price: 19900,
-    rating: 4.4,
     prepTime: "8 min",
-    calories: 510,
   },
   {
     id: "h3",
@@ -164,9 +140,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=600&auto=format&fit=crop&q=80",
     category: "hotdogs",
     price: 25900,
-    rating: 4.7,
     prepTime: "10 min",
-    calories: 730,
     isPopular: true,
   },
 
@@ -178,9 +152,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&auto=format&fit=crop&q=80",
     category: "fries",
     price: 18900,
-    rating: 4.8,
     prepTime: "8 min",
-    calories: 550,
     isPopular: true,
     isFeatured: true,
   },
@@ -191,9 +163,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1576107232684-1279f390859f?w=600&auto=format&fit=crop&q=80",
     category: "fries",
     price: 19900,
-    rating: 4.7,
     prepTime: "7 min",
-    calories: 480,
   },
   {
     id: "f3",
@@ -202,9 +172,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1585109649139-366815a0d713?w=600&auto=format&fit=crop&q=80",
     category: "fries",
     price: 17900,
-    rating: 4.6,
     prepTime: "7-8 min",
-    calories: 440,
   },
   {
     id: "f4",
@@ -213,9 +181,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1618040996337-56904b7850b9?w=600&auto=format&fit=crop&q=80",
     category: "fries",
     price: 22900,
-    rating: 4.8,
     prepTime: "10 min",
-    calories: 680,
     isPopular: true,
   },
 
@@ -227,9 +193,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=600&auto=format&fit=crop&q=80",
     category: "combos",
     price: 49900,
-    rating: 4.9,
     prepTime: "15 min",
-    calories: 1450,
     isPopular: true,
   },
   {
@@ -239,9 +203,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&auto=format&fit=crop&q=80",
     category: "combos",
     price: 64900,
-    rating: 4.9,
     prepTime: "20 min",
-    calories: 2100,
     isPopular: true,
   },
   {
@@ -251,9 +213,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&auto=format&fit=crop&q=80",
     category: "combos",
     price: 24900,
-    rating: 4.6,
     prepTime: "10 min",
-    calories: 610,
   },
 
   // --- BEBIDAS ---
@@ -264,9 +224,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=600&auto=format&fit=crop&q=80",
     category: "drinks",
     price: 11900,
-    rating: 4.8,
     prepTime: "3-5 min",
-    calories: 120,
   },
   {
     id: "d2",
@@ -275,9 +233,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=600&auto=format&fit=crop&q=80",
     category: "drinks",
     price: 13900,
-    rating: 4.7,
     prepTime: "5 min",
-    calories: 380,
   },
   {
     id: "d3",
@@ -286,9 +242,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1546173159-315724a91696?w=600&auto=format&fit=crop&q=80",
     category: "drinks",
     price: 12900,
-    rating: 4.9,
     prepTime: "4 min",
-    calories: 290,
     isPopular: true,
   },
   {
@@ -298,8 +252,6 @@ export const FOOD_ITEMS: FoodItem[] = [
     image: "https://images.unsplash.com/photo-1497534446932-c925b458314e?w=600&auto=format&fit=crop&q=80",
     category: "drinks",
     price: 10900,
-    rating: 4.6,
     prepTime: "3 min",
-    calories: 150,
   },
 ];
