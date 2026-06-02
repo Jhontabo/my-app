@@ -65,7 +65,7 @@ export default function ProductGrid() {
             </p>
           </motion.div>
         ) : (
-          <div className="space-y-12">
+          <div className="space-y-16">
             {grouped.map(({ category, items }) => (
               <motion.section
                 key={category.id}
@@ -75,9 +75,9 @@ export default function ProductGrid() {
                 transition={{ duration: 0.4 }}
                 id={`cat-${category.id}`}
               >
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="text-2xl">{category.icon}</span>
-                  <h2 className="text-2xl sm:text-3xl font-black text-neutral-900 dark:text-white tracking-tight">
+                <div className="flex items-center gap-4 mb-8 pb-4 border-b border-neutral-200/60 dark:border-neutral-800">
+                  <span className="text-3xl sm:text-4xl">{category.icon}</span>
+                  <h2 className="text-3xl sm:text-4xl font-black text-neutral-900 dark:text-white tracking-tight">
                     {category.name}
                   </h2>
                   <span className="text-sm font-semibold text-neutral-400 dark:text-neutral-500 ml-auto">
