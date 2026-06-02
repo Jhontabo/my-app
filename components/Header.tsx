@@ -37,56 +37,58 @@ export default function Header() {
   ];
 
   return (
-    <header
-      className={`sticky top-0 z-40 w-full transition-all duration-300 ${
-        scrolled
-          ? "bg-neutral-950/80 backdrop-blur-md shadow-md border-b border-neutral-800"
-          : "bg-neutral-950/70 backdrop-blur-md border-b border-transparent"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
-        
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-2.5 cursor-pointer group"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        >
-          <div className="w-10 h-10 bg-gradient-to-tr from-orange-500 to-red-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-orange-500/20 group-hover:scale-105 transition-transform duration-200">
-            <Flame className="w-6 h-6 animate-pulse" />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-extrabold text-xl tracking-tight bg-gradient-to-r from-white to-neutral-300 bg-clip-text text-transparent">
-              BITE<span className="text-orange-500">BOX</span>
-            </span>
-            <span className="text-[10px] text-neutral-400 font-medium tracking-widest uppercase -mt-0.5">
-              Comida Rápida Gourmet
-            </span>
-          </div>
-        </motion.div>
-
-        <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-neutral-300">
-          <Link href="/#menu" className="hover:text-orange-500 transition-colors">
-            Menú
-          </Link>
-          <Link href="/admin" className="hover:text-orange-500 transition-colors">
-            Administrar
-          </Link>
-          <Link href="/#contact" className="hover:text-orange-500 transition-colors">
-            Contacto
-          </Link>
-        </nav>
-
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setIsMobileMenuOpen(true)}
-            className="md:hidden p-3 rounded-full hover:bg-neutral-800 text-neutral-300 cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
-            aria-label="Abrir menú"
+    <>
+      <header
+        className={`sticky top-0 z-40 w-full transition-all duration-300 ${
+          scrolled
+            ? "bg-neutral-950/80 backdrop-blur-md shadow-md border-b border-neutral-800"
+            : "bg-neutral-950/70 backdrop-blur-md border-b border-transparent"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+          
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="flex items-center gap-2.5 cursor-pointer group"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
-            <Menu className="w-6 h-6" />
-          </button>
+            <div className="w-10 h-10 bg-gradient-to-tr from-orange-500 to-red-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-orange-500/20 group-hover:scale-105 transition-transform duration-200">
+              <Flame className="w-6 h-6 animate-pulse" />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-extrabold text-xl tracking-tight bg-gradient-to-r from-white to-neutral-300 bg-clip-text text-transparent">
+                BITE<span className="text-orange-500">BOX</span>
+              </span>
+              <span className="text-[10px] text-neutral-400 font-medium tracking-widest uppercase -mt-0.5">
+                Comida Rápida Gourmet
+              </span>
+            </div>
+          </motion.div>
+
+          <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-neutral-300">
+            <Link href="/#menu" className="hover:text-orange-500 transition-colors">
+              Menú
+            </Link>
+            <Link href="/admin" className="hover:text-orange-500 transition-colors">
+              Administrar
+            </Link>
+            <Link href="/#contact" className="hover:text-orange-500 transition-colors">
+              Contacto
+            </Link>
+          </nav>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="md:hidden p-3 rounded-full hover:bg-neutral-800 text-neutral-300 cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
+              aria-label="Abrir menú"
+            >
+              <Menu className="w-6 h-6" />
+            </button>
+          </div>
         </div>
-      </div>
+      </header>
 
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-50 md:hidden">
@@ -129,6 +131,6 @@ export default function Header() {
           </motion.div>
         </div>
       )}
-    </header>
+    </>
   );
 }
