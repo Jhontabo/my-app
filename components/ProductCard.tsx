@@ -1,7 +1,7 @@
 "use client";
 
 import { FoodItem } from "@/data/foodData";
-import { Clock, Flame } from "lucide-react";
+import { Flame } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -55,14 +55,6 @@ export default function ProductCard({ item, onSelect }: ProductCardProps) {
       {/* Product Content Details */}
       <div className="p-5 flex-1 flex flex-col justify-between">
         <div className="space-y-2">
-          {/* Prep Time */}
-          <div className="flex items-center gap-1 text-sm text-neutral-500 dark:text-neutral-400 font-semibold">
-            <span className="flex items-center gap-1.5 bg-neutral-50 dark:bg-neutral-800 px-3 py-1 rounded-full">
-              <Clock className="w-4 h-4 text-neutral-400" />
-              {item.prepTime}
-            </span>
-          </div>
-
           {/* Title */}
           <h3 className="font-extrabold text-neutral-900 dark:text-white text-base sm:text-lg tracking-tight group-hover:text-orange-500 transition-colors duration-200 line-clamp-1">
             {item.title}
