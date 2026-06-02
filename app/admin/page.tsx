@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { useMenu } from "@/context/MenuContext";
 import { FoodItem, CATEGORIES } from "@/data/foodData";
-import { Plus, Edit2, Trash2, ArrowLeft, RotateCcw, X } from "lucide-react";
+import { Plus, Edit2, Trash2, ArrowLeft, RotateCcw, X, LogOut } from "lucide-react";
+import { logout } from "@/app/actions/auth";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -137,18 +138,28 @@ export default function AdminPage() {
             </h1>
           </div>
           
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap justify-center sm:justify-end">
             <button
               onClick={resetMenu}
-              className="px-4 py-2 text-xs font-bold text-neutral-600 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:text-red-500 transition-all inline-flex items-center gap-1.5 cursor-pointer shadow-sm"
+              className="px-4 py-3 text-xs font-bold text-neutral-600 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:text-red-500 transition-all inline-flex items-center gap-1.5 cursor-pointer shadow-sm min-h-[44px]"
               title="Restaurar base de datos del menú predeterminado"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>Restaurar Menú Base</span>
             </button>
+            <form action={logout}>
+              <button
+                type="submit"
+                className="px-4 py-3 text-xs font-bold text-neutral-600 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:text-red-500 transition-all inline-flex items-center gap-1.5 cursor-pointer shadow-sm min-h-[44px]"
+                title="Cerrar sesión"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+                <span>Cerrar Sesión</span>
+              </button>
+            </form>
             <button
               onClick={openAddModal}
-              className="px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-orange-500 to-red-500 rounded-xl hover:shadow-lg hover:shadow-orange-500/25 transition-all inline-flex items-center gap-1.5 cursor-pointer shadow-md"
+              className="px-4 py-3 text-xs font-bold text-white bg-gradient-to-r from-orange-500 to-red-500 rounded-xl hover:shadow-lg hover:shadow-orange-500/25 transition-all inline-flex items-center gap-1.5 cursor-pointer shadow-md min-h-[44px]"
             >
               <Plus className="w-4 h-4" />
               <span>Agregar Plato</span>
@@ -190,7 +201,7 @@ export default function AdminPage() {
               placeholder="Buscar por nombre o descripción..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-4 pr-10 py-2.5 bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-orange-500/25 focus:border-orange-500 transition-all"
+               className="w-full pl-4 pr-10 py-3 bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-orange-500/25 focus:border-orange-500 transition-all min-h-[44px]"
             />
             {searchQuery && (
               <button
@@ -208,7 +219,7 @@ export default function AdminPage() {
               <button
                 key={cat.id}
                 onClick={() => setCategoryFilter(cat.id)}
-                className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+                className={`px-4 py-3 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer min-h-[44px] ${
                   categoryFilter === cat.id
                     ? "bg-orange-500 text-white shadow-md shadow-orange-500/10"
                     : "bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-neutral-600 dark:text-neutral-300"
@@ -298,14 +309,14 @@ export default function AdminPage() {
                         <div className="flex justify-end gap-2">
                           <button
                             onClick={() => openEditModal(item)}
-                            className="p-2 text-neutral-400 hover:text-orange-500 dark:text-neutral-500 dark:hover:text-orange-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-xl transition-colors cursor-pointer"
+                            className="p-3 text-neutral-400 hover:text-orange-500 dark:text-neutral-500 dark:hover:text-orange-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-xl transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
                             title="Editar plato"
                           >
                             <Edit2 className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => handleDelete(item.id, item.title)}
-                            className="p-2 text-neutral-400 hover:text-red-500 dark:text-neutral-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/20 rounded-xl transition-colors cursor-pointer"
+                            className="p-3 text-neutral-400 hover:text-red-500 dark:text-neutral-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/20 rounded-xl transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
                             title="Eliminar plato"
                           >
                             <Trash2 className="w-4 h-4" />
@@ -379,7 +390,7 @@ export default function AdminPage() {
                     value={formData.title}
                     onChange={handleInputChange}
                     placeholder="Ej. Truffle Umami Smash"
-                    className="px-4 py-2.5 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors"
+                    className="px-4 py-3 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors min-h-[44px]"
                   />
                 </div>
 
@@ -392,7 +403,7 @@ export default function AdminPage() {
                     name="category"
                     value={formData.category}
                     onChange={handleInputChange}
-                    className="px-4 py-2.5 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors"
+                    className="px-4 py-3 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors min-h-[44px]"
                   >
                     {CATEGORIES.filter(c => c.id !== "all").map((cat) => (
                       <option key={cat.id} value={cat.id}>
@@ -414,7 +425,7 @@ export default function AdminPage() {
                     value={formData.image}
                     onChange={handleInputChange}
                     placeholder="Dirección URL de Unsplash u otra fuente"
-                    className="px-4 py-2.5 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors"
+                    className="px-4 py-3 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors min-h-[44px]"
                   />
                 </div>
 
@@ -431,7 +442,7 @@ export default function AdminPage() {
                       min={0}
                       value={formData.price}
                       onChange={handleInputChange}
-                      className="px-4 py-2.5 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors"
+                      className="px-4 py-3 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors min-h-[44px]"
                     />
                   </div>
                   <div className="flex flex-col gap-1.5">
@@ -446,7 +457,7 @@ export default function AdminPage() {
                       max={5}
                       value={formData.rating}
                       onChange={handleInputChange}
-                      className="px-4 py-2.5 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors"
+                      className="px-4 py-3 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors min-h-[44px]"
                     />
                   </div>
                 </div>
@@ -463,7 +474,7 @@ export default function AdminPage() {
                       value={formData.prepTime}
                       onChange={handleInputChange}
                       placeholder="Ej. 12-15 min"
-                      className="px-4 py-2.5 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors"
+                      className="px-4 py-3 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors min-h-[44px]"
                     />
                   </div>
                   <div className="flex flex-col gap-1.5">
@@ -476,7 +487,7 @@ export default function AdminPage() {
                       min={0}
                       value={formData.calories}
                       onChange={handleInputChange}
-                      className="px-4 py-2.5 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors"
+                      className="px-4 py-3 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors min-h-[44px]"
                     />
                   </div>
                 </div>
@@ -493,7 +504,7 @@ export default function AdminPage() {
                     value={formData.description}
                     onChange={handleInputChange}
                     placeholder="Escribe los ingredientes clave y el sazón del plato..."
-                    className="px-4 py-2.5 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors resize-none"
+                    className="px-4 py-3 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors resize-none min-h-[44px]"
                   />
                 </div>
 
@@ -505,7 +516,7 @@ export default function AdminPage() {
                     name="isPopular"
                     checked={formData.isPopular}
                     onChange={handleInputChange}
-                    className="w-4.5 h-4.5 accent-orange-500 rounded cursor-pointer"
+                    className="w-5 h-5 accent-orange-500 rounded cursor-pointer"
                   />
                   <label 
                     htmlFor="isPopular"
@@ -523,13 +534,13 @@ export default function AdminPage() {
                       setIsAddModalOpen(false);
                       setEditingItem(null);
                     }}
-                    className="px-5 py-2.5 text-sm font-bold text-neutral-600 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-300 rounded-xl cursor-pointer"
+                    className="px-5 py-3 text-sm font-bold text-neutral-600 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-300 rounded-xl cursor-pointer min-h-[44px]"
                   >
                     Cancelar
                   </button>
                   <button
                     type="submit"
-                    className="px-5 py-2.5 text-sm font-bold text-white bg-gradient-to-r from-orange-500 to-red-500 rounded-xl hover:shadow-lg hover:shadow-orange-500/20 transition-all cursor-pointer"
+                    className="px-5 py-3 text-sm font-bold text-white bg-gradient-to-r from-orange-500 to-red-500 rounded-xl hover:shadow-lg hover:shadow-orange-500/20 transition-all cursor-pointer min-h-[44px]"
                   >
                     {isAddModalOpen ? "Guardar Plato" : "Actualizar Datos"}
                   </button>

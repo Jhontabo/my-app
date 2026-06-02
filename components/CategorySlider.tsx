@@ -13,7 +13,7 @@ export default function CategorySlider({
   setActiveCategory,
 }: CategorySliderProps) {
   return (
-    <div className="w-full py-4 -mx-4 px-4 overflow-x-auto scrollbar-hide touch-pan-x flex items-center justify-start sm:justify-center">
+    <div className="w-full py-4 -mx-4 px-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory touch-pan-x flex items-center justify-start sm:justify-center">
       <div className="flex gap-2.5 sm:gap-3.5 pb-2">
         {CATEGORIES.map((category) => {
           const isActive = activeCategory === category.id;
@@ -21,7 +21,7 @@ export default function CategorySlider({
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className="relative px-5 py-3 rounded-full flex items-center gap-2 text-sm font-semibold select-none cursor-pointer focus:outline-none transition-colors duration-200"
+              className="relative px-5 py-3 rounded-full flex items-center gap-2 text-sm font-semibold select-none cursor-pointer focus:outline-none transition-colors duration-200 snap-start shrink-0"
               style={{
                 WebkitTapHighlightColor: "transparent",
               }}

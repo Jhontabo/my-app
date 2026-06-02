@@ -15,7 +15,7 @@ export default function Home() {
       <Header />
 
       {/* Cuerpo de Contenido Principal */}
-      <main className="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-12 pb-16 sm:pt-16 sm:pb-24 space-y-16">
+      <main className="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-8 pb-12 sm:pt-16 sm:pb-24 space-y-12 sm:space-y-16">
         
         {/* Sección de Menú de Comidas */}
         <section className="space-y-8 scroll-mt-24">

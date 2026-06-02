@@ -56,7 +56,7 @@ export default function ProductGrid({ activeCategory }: ProductGridProps) {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="flex flex-col items-center justify-center py-20 text-center"
+              className="flex flex-col items-center justify-center py-12 sm:py-20 text-center"
             >
               <span className="text-4xl mb-4">🔍</span>
               <h3 className="text-lg font-bold text-neutral-800 dark:text-neutral-200">No encontramos productos que coincidan</h3>

@@ -28,8 +28,8 @@ export default function ProductCard({ item }: ProductCardProps) {
           src={item.image}
           alt={item.title}
           fill
-          sizes="(max-w-640px) 100vw, (max-w-1024px) 50vw, 25vw"
-          className="object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
         />
 
         {/* Backdrop Dark Vignette Overlay for Hover */}
@@ -38,7 +38,7 @@ export default function ProductCard({ item }: ProductCardProps) {
         {/* Top Floating Badges */}
         <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
           {item.isPopular ? (
-            <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-md flex items-center gap-1">
+            <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-[11px] font-black uppercase tracking-wider px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
               <Flame className="w-3 h-3 animate-bounce" />
               <span>Más Vendido</span>
             </div>
@@ -47,7 +47,7 @@ export default function ProductCard({ item }: ProductCardProps) {
           )}
 
           {/* Calorie Indicator */}
-          <div className="bg-black/60 backdrop-blur-md text-white text-[9px] font-bold px-2 py-0.5 rounded-md">
+          <div className="bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-md">
             {item.calories} kcal
           </div>
         </div>
@@ -82,7 +82,7 @@ export default function ProductCard({ item }: ProductCardProps) {
         {/* Pricing and Action Button */}
         <div className="flex items-center justify-between mt-5 pt-3 border-t border-neutral-100/50 dark:border-neutral-800/40">
           <div className="flex flex-col">
-            <span className="text-[10px] text-neutral-400 dark:text-neutral-500 font-bold uppercase tracking-wider">
+            <span className="text-[11px] text-neutral-400 dark:text-neutral-500 font-bold uppercase tracking-wider">
               Precio
             </span>
             <span className="text-xl sm:text-2xl font-black text-neutral-900 dark:text-white tracking-tight">
