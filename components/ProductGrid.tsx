@@ -157,7 +157,7 @@ export default function ProductGrid() {
                 </div>
 
                 {/* Description */}
-                <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                <p className="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed">
                   {selectedItem.description}
                 </p>
 
@@ -169,24 +169,16 @@ export default function ProductGrid() {
                   </span>
                 </div>
 
-                {/* Price & CTA */}
-                <div className="flex items-center justify-between pt-4 border-t border-neutral-200 dark:border-neutral-800">
-                  <div>
-                    <span className="text-xs font-bold text-neutral-400 uppercase tracking-wider">Precio</span>
-                    <p className="text-3xl font-black text-neutral-900 dark:text-white">
-                      {new Intl.NumberFormat("es-CO", {
-                        style: "currency",
-                        currency: "COP",
-                        minimumFractionDigits: 0,
-                      }).format(selectedItem.price)}
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => setSelectedItem(null)}
-                    className="px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:shadow-orange-500/25 transition-all cursor-pointer min-h-[44px]"
-                  >
-                    Agregar al pedido
-                  </button>
+                {/* Price */}
+                <div className="pt-4 border-t border-neutral-200 dark:border-neutral-800">
+                  <span className="text-xs font-bold text-neutral-400 uppercase tracking-wider">Precio</span>
+                  <p className="text-3xl font-black text-neutral-900 dark:text-white">
+                    {new Intl.NumberFormat("es-CO", {
+                      style: "currency",
+                      currency: "COP",
+                      minimumFractionDigits: 0,
+                    }).format(selectedItem.price)}
+                  </p>
                 </div>
               </div>
             </motion.div>

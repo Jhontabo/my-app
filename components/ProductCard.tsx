@@ -89,9 +89,9 @@ export default function ProductCard({ item, onSelect }: ProductCardProps) {
             </span>
           </div>
 
-          {/* Consumo Local Label */}
+          {/* Tiempo estimado */}
           <div className="text-xs font-bold text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-950/20 px-3 py-1.5 rounded-xl border border-orange-100/10">
-            Servido al instante
+            ⏱️ {item.prepTime}
           </div>
         </div>
       </div>
