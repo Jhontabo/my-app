@@ -33,6 +33,7 @@ export default function Header() {
   const navLinks = [
     { href: "/#menu", label: "Menú" },
     { href: "/admin", label: "Administrar" },
+    { href: "/#contact", label: "Contacto" },
   ];
 
   return (
@@ -70,6 +71,9 @@ export default function Header() {
           </Link>
           <Link href="/admin" className="hover:text-orange-500 transition-colors">
             Administrar
+          </Link>
+          <Link href="/#contact" className="hover:text-orange-500 transition-colors">
+            Contacto
           </Link>
         </nav>
 
