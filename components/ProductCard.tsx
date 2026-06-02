@@ -7,9 +7,10 @@ import Image from "next/image";
 
 interface ProductCardProps {
   item: FoodItem;
+  onSelect: (item: FoodItem) => void;
 }
 
-export default function ProductCard({ item }: ProductCardProps) {
+export default function ProductCard({ item, onSelect }: ProductCardProps) {
 
   return (
     <motion.div
@@ -19,7 +20,8 @@ export default function ProductCard({ item }: ProductCardProps) {
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, type: "spring", stiffness: 100, damping: 15 }}
       whileHover={{ y: -6 }}
-      className="group relative flex flex-col justify-between bg-white dark:bg-neutral-900 rounded-3xl border border-neutral-100 dark:border-neutral-800/50 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
+      onClick={() => onSelect(item)}
+      className="group relative flex flex-col justify-between bg-white dark:bg-neutral-900 rounded-3xl border border-neutral-100 dark:border-neutral-800/50 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
     >
       
       {/* Product Image and Overlay Badges */}
