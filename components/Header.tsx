@@ -33,8 +33,6 @@ export default function Header() {
   const navLinks = [
     { href: "/#menu", label: "Menú" },
     { href: "/admin", label: "Administrar" },
-    { href: "#about", label: "Nosotros" },
-    { href: "#contact", label: "Contacto" },
   ];
 
   return (
@@ -73,12 +71,6 @@ export default function Header() {
           <Link href="/admin" className="hover:text-orange-500 transition-colors">
             Administrar
           </Link>
-          <a href="#about" className="hover:text-orange-500 transition-colors">
-            Nosotros
-          </a>
-          <a href="#contact" className="hover:text-orange-500 transition-colors">
-            Contacto
-          </a>
         </nav>
 
         <div className="flex items-center gap-2">

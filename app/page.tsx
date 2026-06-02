@@ -43,9 +43,6 @@ export default function Home() {
             
             <div className="flex gap-6 font-semibold">
               <a href="#menu" className="hover:text-orange-500 transition-colors">Menú</a>
-              <a href="#" className="hover:text-orange-500 transition-colors">Políticas de Privacidad</a>
-              <a href="#" className="hover:text-orange-500 transition-colors">Términos de Servicio</a>
-              <a href="#" className="hover:text-orange-500 transition-colors">Contacto</a>
             </div>
           </div>
           
