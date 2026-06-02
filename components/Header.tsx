@@ -1,25 +1,13 @@
 "use client";
 
-import { Flame, Moon, Sun, Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Flame, Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function Header() {
-  const [darkMode, setDarkMode] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const isDark =
-      localStorage.getItem("theme") === "dark" ||
-      (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches);
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setDarkMode(isDark);
-    if (isDark) {
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,18 +28,6 @@ export default function Header() {
     };
   }, [isMobileMenuOpen]);
 
-  const toggleDarkMode = () => {
-    if (darkMode) {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-      setDarkMode(false);
-    } else {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-      setDarkMode(true);
-    }
-  };
-
   const closeMenu = () => setIsMobileMenuOpen(false);
 
   const navLinks = [
@@ -66,8 +42,8 @@ export default function Header() {
     <header
       className={`sticky top-0 z-40 w-full transition-all duration-300 ${
         scrolled
-          ? "bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md shadow-md border-b border-neutral-100 dark:border-neutral-800"
-          : "bg-white/70 dark:bg-neutral-950/70 backdrop-blur-md border-b border-transparent"
+          ? "bg-neutral-950/80 backdrop-blur-md shadow-md border-b border-neutral-800"
+          : "bg-neutral-950/70 backdrop-blur-md border-b border-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
@@ -82,7 +58,7 @@ export default function Header() {
             <Flame className="w-6 h-6 animate-pulse" />
           </div>
           <div className="flex flex-col">
-            <span className="font-extrabold text-xl tracking-tight bg-gradient-to-r from-neutral-900 to-neutral-700 dark:from-white dark:to-neutral-300 bg-clip-text text-transparent">
+            <span className="font-extrabold text-xl tracking-tight bg-gradient-to-r from-white to-neutral-300 bg-clip-text text-transparent">
               BITE<span className="text-orange-500">BOX</span>
             </span>
             <span className="text-[10px] text-neutral-400 font-medium tracking-widest uppercase -mt-0.5">
@@ -91,7 +67,7 @@ export default function Header() {
           </div>
         </motion.div>
 
-        <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-neutral-600 dark:text-neutral-300">
+        <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-neutral-300">
           <Link href="/#menu" className="hover:text-orange-500 transition-colors">
             Menú
           </Link>
@@ -111,16 +87,8 @@ export default function Header() {
 
         <div className="flex items-center gap-2">
           <button
-            onClick={toggleDarkMode}
-            className="p-3 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-600 dark:text-neutral-300 transition-all cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
-            aria-label="Toggle dark mode"
-          >
-            {darkMode ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5" />}
-          </button>
-
-          <button
             onClick={() => setIsMobileMenuOpen(true)}
-            className="md:hidden p-3 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-600 dark:text-neutral-300 cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="md:hidden p-3 rounded-full hover:bg-neutral-800 text-neutral-300 cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label="Abrir menú"
           >
             <Menu className="w-6 h-6" />
@@ -128,64 +96,47 @@ export default function Header() {
         </div>
       </div>
 
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={closeMenu}
-              className="fixed inset-0 bg-black/50 z-50 md:hidden"
-            />
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-50 md:hidden">
+          <div
+            onClick={closeMenu}
+            className="absolute inset-0 bg-black/50"
+          />
 
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="fixed top-0 right-0 bottom-0 w-72 bg-white dark:bg-neutral-900 z-50 shadow-2xl md:hidden flex flex-col"
-            >
-              <div className="flex items-center justify-between p-5 border-b border-neutral-100 dark:border-neutral-800">
-                <span className="font-extrabold text-lg tracking-tight text-neutral-900 dark:text-white">
-                  BITE<span className="text-orange-500">BOX</span>
-                </span>
-                <button
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            transition={{ type: "spring", damping: 30, stiffness: 300 }}
+            className="absolute top-0 right-0 bottom-0 w-72 bg-neutral-900 shadow-2xl flex flex-col"
+          >
+            <div className="flex items-center justify-between p-5 border-b border-neutral-800">
+              <span className="font-extrabold text-lg tracking-tight text-white">
+                BITE<span className="text-orange-500">BOX</span>
+              </span>
+              <button
+                onClick={closeMenu}
+                className="p-3 rounded-full hover:bg-neutral-800 cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
+                aria-label="Cerrar menú"
+              >
+                <X className="w-5 h-5 text-neutral-300" />
+              </button>
+            </div>
+
+            <nav className="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
                   onClick={closeMenu}
-                  className="p-3 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
-                  aria-label="Cerrar menú"
+                  className="block px-5 py-4 rounded-xl text-base font-bold text-neutral-300 hover:bg-neutral-800 hover:text-orange-500 transition-colors min-h-[44px] flex items-center"
                 >
-                  <X className="w-5 h-5 text-neutral-600 dark:text-neutral-300" />
-                </button>
-              </div>
-
-              <nav className="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={closeMenu}
-                    className="block px-5 py-4 rounded-xl text-base font-bold text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-orange-500 transition-colors min-h-[44px] flex items-center"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </nav>
-
-              <div className="p-5 border-t border-neutral-100 dark:border-neutral-800">
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => { toggleDarkMode(); closeMenu(); }}
-                    className="flex-1 p-3 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-sm font-bold text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer min-h-[44px]"
-                  >
-                    {darkMode ? "☀️ Modo Claro" : "🌙 Modo Oscuro"}
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          </motion.div>
+        </div>
+      )}
     </header>
   );
 }
