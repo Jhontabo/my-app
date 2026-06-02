@@ -116,47 +116,47 @@ export default function AdminPage() {
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 transition-colors duration-300">
       
       {/* Header Panel */}
-      <header className="sticky top-0 z-30 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 py-4 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
+      <header className="sticky top-0 z-30 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 py-3 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
             <Link
               href="/"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-neutral-600 hover:text-orange-500 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors bg-neutral-100 dark:bg-neutral-800 px-3 py-2 rounded-xl"
+              className="inline-flex items-center gap-1 text-xs font-bold text-neutral-600 hover:text-orange-500 dark:text-neutral-400 dark:hover:text-orange-400 transition-colors bg-neutral-100 dark:bg-neutral-800 px-2.5 py-2 rounded-xl flex-shrink-0"
+              title="Volver al menú"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Ver Menú Público</span>
+              <span className="hidden sm:inline">Ver Menú</span>
             </Link>
-            <div className="h-6 w-[1px] bg-neutral-200 dark:bg-neutral-700 hidden sm:block" />
-            <h1 className="text-xl font-black text-neutral-900 dark:text-white tracking-tight">
-              BITE<span className="text-orange-500">BOX</span> • Panel de Control
+            <h1 className="text-base sm:text-xl font-black text-neutral-900 dark:text-white tracking-tight truncate">
+              👑 Panel
             </h1>
           </div>
           
-          <div className="flex items-center gap-2 flex-wrap justify-center sm:justify-end">
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
             <button
               onClick={resetMenu}
-              className="px-4 py-3 text-xs font-bold text-neutral-600 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:text-red-500 transition-all inline-flex items-center gap-1.5 cursor-pointer shadow-sm min-h-[44px]"
-              title="Restaurar base de datos del menú predeterminado"
+              className="p-2.5 sm:px-3 sm:py-2.5 text-xs font-bold text-neutral-600 dark:text-neutral-400 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:text-red-500 transition-all cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
+              title="Restaurar menú base"
             >
-              <RotateCcw className="w-3.5 h-3.5" />
-              <span>Restaurar Menú Base</span>
+              <RotateCcw className="w-4 h-4 sm:mr-1.5" />
+              <span className="hidden sm:inline">Restaurar</span>
             </button>
             <form action={logout}>
               <button
                 type="submit"
-                className="px-4 py-3 text-xs font-bold text-neutral-600 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:text-red-500 transition-all inline-flex items-center gap-1.5 cursor-pointer shadow-sm min-h-[44px]"
+                className="p-2.5 sm:px-3 sm:py-2.5 text-xs font-bold text-neutral-600 dark:text-neutral-400 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:text-red-500 transition-all cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
                 title="Cerrar sesión"
               >
-                <LogOut className="w-3.5 h-3.5" />
-                <span>Cerrar Sesión</span>
+                <LogOut className="w-4 h-4 sm:mr-1.5" />
+                <span className="hidden sm:inline">Salir</span>
               </button>
             </form>
             <button
               onClick={openAddModal}
-              className="px-4 py-3 text-xs font-bold text-white bg-gradient-to-r from-orange-500 to-red-500 rounded-xl hover:shadow-lg hover:shadow-orange-500/25 transition-all inline-flex items-center gap-1.5 cursor-pointer shadow-md min-h-[44px]"
+              className="px-3 sm:px-4 py-2.5 text-xs font-bold text-white bg-gradient-to-r from-orange-500 to-red-500 rounded-xl hover:shadow-lg hover:shadow-orange-500/25 transition-all inline-flex items-center gap-1 cursor-pointer shadow-md min-h-[44px]"
             >
-              <Plus className="w-4 h-4" />
-              <span>Agregar Plato</span>
+              <Plus className="w-4 h-4 sm:mr-0.5" />
+              <span className="hidden sm:inline">Agregar</span>
             </button>
           </div>
         </div>
@@ -226,9 +226,71 @@ export default function AdminPage() {
 
         </section>
 
-        {/* Database List Table */}
+        {/* Database List - Cards on mobile, Table on desktop */}
         <section className="bg-white dark:bg-neutral-900 rounded-3xl border border-neutral-200/50 dark:border-neutral-800 shadow-sm overflow-hidden">
-          <div className="overflow-x-auto">
+          
+          {/* Mobile Card View */}
+          <div className="md:hidden divide-y divide-neutral-100 dark:divide-neutral-800">
+            {filteredItems.length === 0 ? (
+              <div className="px-6 py-16 text-center text-neutral-400 font-medium">
+                No encontramos ningún plato que coincida con los filtros aplicados.
+              </div>
+            ) : (
+              filteredItems.map((item) => (
+                <div key={item.id} className="p-4 flex items-center gap-3">
+                  <div className="relative w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 ring-1 ring-neutral-200/60 dark:ring-neutral-700/60 shadow-sm">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      sizes="56px"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-extrabold text-sm text-neutral-900 dark:text-white truncate">
+                        {item.title}
+                      </span>
+                      {item.isPopular && (
+                        <span className="bg-orange-50 dark:bg-orange-950/40 text-orange-600 dark:text-orange-400 text-[8px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-full flex-shrink-0">
+                          Pop
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2 mt-0.5 text-xs text-neutral-400">
+                      <span className="bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded-md">
+                        {CATEGORIES.find(c => c.id === item.category)?.name || item.category}
+                      </span>
+                      <span>⏱️ {item.prepTime}</span>
+                    </div>
+                    <div className="font-extrabold text-sm text-neutral-900 dark:text-white mt-0.5">
+                      {formatCOP(item.price)}
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-1.5 flex-shrink-0">
+                    <button
+                      onClick={() => openEditModal(item)}
+                      className="p-2.5 text-neutral-400 hover:text-orange-500 dark:text-neutral-500 dark:hover:text-orange-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-xl transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
+                      title="Editar"
+                    >
+                      <Edit2 className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(item.id, item.title)}
+                      className="p-2.5 text-neutral-400 hover:text-red-500 dark:text-neutral-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/20 rounded-xl transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
+                      title="Eliminar"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+
+          {/* Desktop Table View */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full border-collapse text-left text-sm text-neutral-500 dark:text-neutral-400">
               <thead className="bg-neutral-50 dark:bg-neutral-800/40 text-xs font-bold text-neutral-400 uppercase tracking-wider border-b border-neutral-100 dark:border-neutral-800">
                 <tr>
