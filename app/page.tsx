@@ -1,13 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Header from "@/components/Header";
-import CategorySlider from "@/components/CategorySlider";
 import ProductGrid from "@/components/ProductGrid";
 import SectionTitle from "@/components/SectionTitle";
 
 export default function Home() {
-  const [activeCategory, setActiveCategory] = useState("all");
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -27,14 +24,8 @@ export default function Home() {
             />
           </div>
 
-          {/* Slider de Categorías con Scroll Horizontal */}
-          <CategorySlider
-            activeCategory={activeCategory}
-            setActiveCategory={setActiveCategory}
-          />
-
-          {/* Grilla Filtable e Interactiva con Buscador */}
-          <ProductGrid activeCategory={activeCategory} />
+          {/* Grilla con todas las categorías */}
+          <ProductGrid />
         </section>
 
       </main>
