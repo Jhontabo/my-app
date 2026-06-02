@@ -56,9 +56,9 @@ export default function ProductCard({ item, onSelect }: ProductCardProps) {
       <div className="p-5 flex-1 flex flex-col justify-between">
         <div className="space-y-2">
           {/* Prep Time */}
-          <div className="flex items-center gap-1 text-xs text-neutral-500 dark:text-neutral-400 font-semibold">
-            <span className="flex items-center gap-1 bg-neutral-50 dark:bg-neutral-800 px-2 py-0.5 rounded-full">
-              <Clock className="w-3.5 h-3.5 text-neutral-400" />
+          <div className="flex items-center gap-1 text-sm text-neutral-500 dark:text-neutral-400 font-semibold">
+            <span className="flex items-center gap-1.5 bg-neutral-50 dark:bg-neutral-800 px-3 py-1 rounded-full">
+              <Clock className="w-4 h-4 text-neutral-400" />
               {item.prepTime}
             </span>
           </div>
@@ -90,7 +90,7 @@ export default function ProductCard({ item, onSelect }: ProductCardProps) {
           </div>
 
           {/* Tiempo estimado */}
-          <div className="text-xs font-bold text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-950/20 px-3 py-1.5 rounded-xl border border-orange-100/10">
+          <div className="text-sm sm:text-base font-bold text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-950/20 px-3 py-1.5 rounded-xl border border-orange-100/10">
             ⏱️ {item.prepTime}
           </div>
         </div>
