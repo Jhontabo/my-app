@@ -34,7 +34,6 @@ export default function Header() {
     { href: "/#menu", label: "Menú" },
     { href: "/admin", label: "Administrar" },
     { href: "#about", label: "Nosotros" },
-    { href: "#reviews", label: "Reseñas" },
     { href: "#contact", label: "Contacto" },
   ];
 
@@ -76,9 +75,6 @@ export default function Header() {
           </Link>
           <a href="#about" className="hover:text-orange-500 transition-colors">
             Nosotros
-          </a>
-          <a href="#reviews" className="hover:text-orange-500 transition-colors">
-            Reseñas
           </a>
           <a href="#contact" className="hover:text-orange-500 transition-colors">
             Contacto
