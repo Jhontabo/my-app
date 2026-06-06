@@ -6,11 +6,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useMenu } from "@/context/MenuContext";
 import { FoodItem, CATEGORIES } from "@/data/foodData";
-import { Plus, Edit2, Trash2, ArrowLeft, RotateCcw, X, LogOut } from "lucide-react";
+import { Plus, Edit2, Trash2, ArrowLeft, RotateCcw, X, LogOut, Loader2 } from "lucide-react";
 import { logout } from "@/app/actions/auth";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import ConfirmModal from "@/components/ConfirmModal";
+import { useToast } from "@/context/ToastContext";
 
 const foodFormSchema = z.object({
   title: z.string().min(1, "El nombre es obligatorio"),
@@ -36,6 +38,7 @@ const defaultFormValues: FoodFormData = {
 
 export default function AdminPage() {
   const { menu, addFoodItem, updateFoodItem, deleteFoodItem, resetMenu } = useMenu();
+  const { showToast } = useToast();
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
   
@@ -43,11 +46,20 @@ export default function AdminPage() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<FoodItem | null>(null);
 
+  // Confirm modal states
+  const [confirmState, setConfirmState] = useState<{
+    isOpen: boolean;
+    title: string;
+    message: string;
+    variant: "danger" | "default";
+    onConfirm: () => void;
+  }>({ isOpen: false, title: "", message: "", variant: "default", onConfirm: () => {} });
+
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<FoodFormData>({
     resolver: zodResolver(foodFormSchema),
     defaultValues: defaultFormValues,
@@ -74,18 +86,42 @@ export default function AdminPage() {
   const onAddSubmit = (data: FoodFormData) => {
     addFoodItem(data);
     setIsAddModalOpen(false);
+    showToast(`"${data.title}" agregado al menú`, "success");
   };
 
   const onEditSubmit = (data: FoodFormData) => {
     if (!editingItem) return;
     updateFoodItem({ ...data, id: editingItem.id });
     setEditingItem(null);
+    showToast(`"${data.title}" actualizado correctamente`, "success");
   };
 
   const handleDelete = (id: string, title: string) => {
-    if (window.confirm(`¿Estás seguro de que deseas eliminar el plato "${title}" del menú?`)) {
-      deleteFoodItem(id);
-    }
+    setConfirmState({
+      isOpen: true,
+      title: "Eliminar Plato",
+      message: `¿Estás seguro de que deseas eliminar "${title}" del menú?`,
+      variant: "danger",
+      onConfirm: () => {
+        deleteFoodItem(id);
+        setConfirmState((s) => ({ ...s, isOpen: false }));
+        showToast(`"${title}" eliminado del menú`, "error");
+      },
+    });
+  };
+
+  const handleResetMenu = () => {
+    setConfirmState({
+      isOpen: true,
+      title: "Restaurar Menú",
+      message: "¿Estás seguro de que deseas restaurar el menú original? Se perderán todos los cambios personalizados.",
+      variant: "danger",
+      onConfirm: () => {
+        resetMenu();
+        setConfirmState((s) => ({ ...s, isOpen: false }));
+        showToast("Menú restaurado a la versión original", "info");
+      },
+    });
   };
 
   // Filter items
@@ -127,7 +163,7 @@ export default function AdminPage() {
           
           <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
             <button
-              onClick={resetMenu}
+              onClick={handleResetMenu}
               className="p-2.5 sm:px-3 sm:py-2.5 text-xs font-bold text-neutral-600 dark:text-neutral-400 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:text-red-500 transition-all cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
               title="Restaurar menú base"
             >
@@ -554,9 +590,11 @@ export default function AdminPage() {
                   </button>
                   <button
                     type="submit"
-                    className="px-5 py-3 text-sm font-bold text-white bg-gradient-to-r from-orange-500 to-red-500 rounded-xl hover:shadow-lg hover:shadow-orange-500/20 transition-all cursor-pointer min-h-[44px]"
+                    disabled={isSubmitting}
+                    className="px-5 py-3 text-sm font-bold text-white bg-gradient-to-r from-orange-500 to-red-500 rounded-xl hover:shadow-lg hover:shadow-orange-500/20 transition-all cursor-pointer min-h-[44px] disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center gap-2"
                   >
-                    {isAddModalOpen ? "Guardar Plato" : "Actualizar Datos"}
+                    {isSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
+                    {isSubmitting ? "Guardando..." : isAddModalOpen ? "Guardar Plato" : "Actualizar Datos"}
                   </button>
                 </div>
 
@@ -566,6 +604,16 @@ export default function AdminPage() {
         )}
       </AnimatePresence>
 
+      {/* Confirm Modal */}
+      <ConfirmModal
+        isOpen={confirmState.isOpen}
+        title={confirmState.title}
+        message={confirmState.message}
+        variant={confirmState.variant}
+        confirmLabel={confirmState.variant === "danger" ? "Eliminar" : "Confirmar"}
+        onConfirm={confirmState.onConfirm}
+        onCancel={() => setConfirmState((s) => ({ ...s, isOpen: false }))}
+      />
     </div>
   );
 }

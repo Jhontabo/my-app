@@ -57,9 +57,7 @@ export function MenuProvider({ children }: { children: React.ReactNode }) {
   };
 
   const resetMenu = () => {
-    if (window.confirm("¿Estás seguro de que deseas restaurar el menú original predeterminado? Se perderán todos tus cambios personalizados.")) {
-      saveMenu(FOOD_ITEMS);
-    }
+    saveMenu(FOOD_ITEMS);
   };
 
   return (
