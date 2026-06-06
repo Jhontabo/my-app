@@ -1,11 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import Header from "@/components/Header";
 import ProductGrid from "@/components/ProductGrid";
+import CategorySlider from "@/components/CategorySlider";
 import SectionTitle from "@/components/SectionTitle";
 import { MapPin, Phone, Clock, Mail } from "lucide-react";
 
 export default function Home() {
+  const [activeCategory, setActiveCategory] = useState("all");
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -25,8 +28,14 @@ export default function Home() {
             />
           </div>
 
+          {/* Filtro de categorías */}
+          <CategorySlider
+            activeCategory={activeCategory}
+            setActiveCategory={setActiveCategory}
+          />
+
           {/* Grilla con todas las categorías */}
-          <ProductGrid />
+          <ProductGrid categoryFilter={activeCategory} />
         </section>
 
       </main>

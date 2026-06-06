@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { useMenu } from "@/context/MenuContext";
 import { FoodItem, CATEGORIES } from "@/data/foodData";
 import { Plus, Edit2, Trash2, ArrowLeft, RotateCcw, X, LogOut } from "lucide-react";
@@ -8,6 +11,28 @@ import { logout } from "@/app/actions/auth";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+
+const foodFormSchema = z.object({
+  title: z.string().min(1, "El nombre es obligatorio"),
+  description: z.string().min(1, "La descripción es obligatoria"),
+  image: z.string().url("Debe ser una URL válida").min(1, "La URL de la imagen es obligatoria"),
+  category: z.string().min(1, "Selecciona una categoría"),
+  price: z.number().min(1, "El precio debe ser mayor a 0"),
+  prepTime: z.string().min(1, "El tiempo de preparación es obligatorio"),
+  isPopular: z.boolean(),
+});
+
+type FoodFormData = z.infer<typeof foodFormSchema>;
+
+const defaultFormValues: FoodFormData = {
+  title: "",
+  description: "",
+  image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80",
+  category: "burgers",
+  price: 25000,
+  prepTime: "10-12 min",
+  isPopular: false,
+};
 
 export default function AdminPage() {
   const { menu, addFoodItem, updateFoodItem, deleteFoodItem, resetMenu } = useMenu();
@@ -18,43 +43,24 @@ export default function AdminPage() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<FoodItem | null>(null);
 
-  // Form states (Add/Edit)
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    image: "",
-    category: "burgers",
-    price: 0,
-    prepTime: "12-15 min",
-    isPopular: false,
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FoodFormData>({
+    resolver: zodResolver(foodFormSchema),
+    defaultValues: defaultFormValues,
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target;
-    if (type === "checkbox") {
-      const checked = (e.target as HTMLInputElement).checked;
-      setFormData((prev) => ({ ...prev, [name]: checked }));
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: name === "price" ? Number(value) : value }));
-    }
-  };
-
   const openAddModal = () => {
-    setFormData({
-      title: "",
-      description: "",
-      image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80",
-      category: "burgers",
-      price: 25000,
-      prepTime: "10-12 min",
-      isPopular: false,
-    });
+    reset(defaultFormValues);
     setIsAddModalOpen(true);
   };
 
   const openEditModal = (item: FoodItem) => {
     setEditingItem(item);
-    setFormData({
+    reset({
       title: item.title,
       description: item.description,
       image: item.image,
@@ -65,27 +71,14 @@ export default function AdminPage() {
     });
   };
 
-  const handleAddSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.title || !formData.description || !formData.image) {
-      alert("Por favor llena todos los campos necesarios.");
-      return;
-    }
-    addFoodItem(formData);
+  const onAddSubmit = (data: FoodFormData) => {
+    addFoodItem(data);
     setIsAddModalOpen(false);
   };
 
-  const handleEditSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const onEditSubmit = (data: FoodFormData) => {
     if (!editingItem) return;
-    if (!formData.title || !formData.description || !formData.image) {
-      alert("Por favor llena todos los campos necesarios.");
-      return;
-    }
-    updateFoodItem({
-      ...formData,
-      id: editingItem.id,
-    });
+    updateFoodItem({ ...data, id: editingItem.id });
     setEditingItem(null);
   };
 
@@ -245,6 +238,7 @@ export default function AdminPage() {
                       fill
                       sizes="56px"
                       className="object-cover"
+                      loading="lazy"
                     />
                   </div>
                   <div className="flex-1 min-w-0">
@@ -320,6 +314,7 @@ export default function AdminPage() {
                             fill
                             sizes="48px"
                             className="object-cover"
+                            loading="lazy"
                           />
                         </div>
                         <div className="flex flex-col min-w-0">
@@ -427,7 +422,7 @@ export default function AdminPage() {
 
               {/* Form Input fields */}
               <form 
-                onSubmit={isAddModalOpen ? handleAddSubmit : handleEditSubmit}
+                onSubmit={handleSubmit(isAddModalOpen ? onAddSubmit : onEditSubmit)}
                 className="space-y-4 flex-1"
               >
                 {/* Title */}
@@ -437,13 +432,13 @@ export default function AdminPage() {
                   </label>
                   <input
                     type="text"
-                    name="title"
-                    required
-                    value={formData.title}
-                    onChange={handleInputChange}
+                    {...register("title")}
                     placeholder="Ej. Truffle Umami Smash"
                     className="px-4 py-3 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors min-h-[44px]"
                   />
+                  {errors.title && (
+                    <span className="text-xs text-red-500 font-semibold">{errors.title.message}</span>
+                  )}
                 </div>
 
                 {/* Category */}
@@ -452,9 +447,7 @@ export default function AdminPage() {
                     Categoría del Menú *
                   </label>
                   <select
-                    name="category"
-                    value={formData.category}
-                    onChange={handleInputChange}
+                    {...register("category")}
                     className="px-4 py-3 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors min-h-[44px]"
                   >
                     {CATEGORIES.filter(c => c.id !== "all").map((cat) => (
@@ -463,6 +456,9 @@ export default function AdminPage() {
                       </option>
                     ))}
                   </select>
+                  {errors.category && (
+                    <span className="text-xs text-red-500 font-semibold">{errors.category.message}</span>
+                  )}
                 </div>
 
                 {/* Image URL */}
@@ -472,13 +468,13 @@ export default function AdminPage() {
                   </label>
                   <input
                     type="text"
-                    name="image"
-                    required
-                    value={formData.image}
-                    onChange={handleInputChange}
+                    {...register("image")}
                     placeholder="Dirección URL de Unsplash u otra fuente"
                     className="px-4 py-3 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors min-h-[44px]"
                   />
+                  {errors.image && (
+                    <span className="text-xs text-red-500 font-semibold">{errors.image.message}</span>
+                  )}
                 </div>
 
                 {/* Price and PrepTime Row */}
@@ -489,13 +485,12 @@ export default function AdminPage() {
                     </label>
                     <input
                       type="number"
-                      name="price"
-                      required
-                      min={0}
-                      value={formData.price}
-                      onChange={handleInputChange}
+                      {...register("price", { valueAsNumber: true })}
                       className="px-4 py-3 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors min-h-[44px]"
                     />
+                    {errors.price && (
+                      <span className="text-xs text-red-500 font-semibold">{errors.price.message}</span>
+                    )}
                   </div>
                   <div className="flex flex-col gap-1.5">
                     <label className="text-xs font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider">
@@ -503,12 +498,13 @@ export default function AdminPage() {
                     </label>
                     <input
                       type="text"
-                      name="prepTime"
-                      value={formData.prepTime}
-                      onChange={handleInputChange}
+                      {...register("prepTime")}
                       placeholder="Ej. 12-15 min"
                       className="px-4 py-3 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors min-h-[44px]"
                     />
+                    {errors.prepTime && (
+                      <span className="text-xs text-red-500 font-semibold">{errors.prepTime.message}</span>
+                    )}
                   </div>
                 </div>
 
@@ -518,14 +514,14 @@ export default function AdminPage() {
                     Descripción del Plato *
                   </label>
                   <textarea
-                    name="description"
-                    required
+                    {...register("description")}
                     rows={3}
-                    value={formData.description}
-                    onChange={handleInputChange}
                     placeholder="Escribe los ingredientes clave y el sazón del plato..."
                     className="px-4 py-3 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm focus:outline-none focus:border-orange-500 dark:text-white transition-colors resize-none min-h-[44px]"
                   />
+                  {errors.description && (
+                    <span className="text-xs text-red-500 font-semibold">{errors.description.message}</span>
+                  )}
                 </div>
 
                 {/* Switched tags (Popular / Bestseller) */}
@@ -533,9 +529,7 @@ export default function AdminPage() {
                   <input
                     type="checkbox"
                     id="isPopular"
-                    name="isPopular"
-                    checked={formData.isPopular}
-                    onChange={handleInputChange}
+                    {...register("isPopular")}
                     className="w-5 h-5 accent-orange-500 rounded cursor-pointer"
                   />
                   <label 

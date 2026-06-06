@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { MenuProvider } from "@/context/MenuContext";
@@ -14,8 +14,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BITEBOX | Gourmet Fast Food & Premium Burgers",
-  description: "Savor the best truffle smashed burgers, loaded gourmet fries, and sourdough pizzas. Handcrafted daily with fresh local ingredients and delivered warm in minutes.",
+  title: "BITEBOX | Comida Rápida Gourmet & Hamburguesas Premium",
+  description:
+    "Las mejores hamburguesas trufadas, pizzas artesanales y comida rápida gourmet de Colombia. Preparadas al instante con ingredientes locales frescos.",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    title: "BITEBOX",
+    statusBarStyle: "black-translucent",
+  },
+  openGraph: {
+    title: "BITEBOX | Comida Rápida Gourmet",
+    description:
+      "Las mejores hamburguesas trufadas, pizzas artesanales y comida rápida gourmet de Colombia.",
+    siteName: "BITEBOX",
+    locale: "es_CO",
+    type: "website",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#f97316",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -25,10 +45,13 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="es"
       className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased scroll-smooth`}
       suppressHydrationWarning
     >
+      <head>
+        <link rel="apple-touch-icon" href="/icon-192.png" />
+      </head>
       <body
         className="min-h-full flex flex-col bg-neutral-950 text-neutral-50 transition-colors duration-300"
         suppressHydrationWarning

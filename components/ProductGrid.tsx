@@ -8,7 +8,11 @@ import { Search, X, Clock, Flame } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
 
-export default function ProductGrid() {
+interface ProductGridProps {
+  categoryFilter?: string;
+}
+
+export default function ProductGrid({ categoryFilter = "all" }: ProductGridProps) {
   const { menu } = useMenu();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedItem, setSelectedItem] = useState<FoodItem | null>(null);
@@ -17,7 +21,12 @@ export default function ProductGrid() {
     item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.description.toLowerCase().includes(searchQuery.toLowerCase());
 
-  const allItems = menu.filter(matchesSearch);
+  const matchesCategory = (item: { category: string }) =>
+    categoryFilter === "all" || item.category === categoryFilter;
+
+  const allItems = menu.filter(
+    (item) => matchesSearch(item) && matchesCategory(item),
+  );
 
   const grouped = CATEGORIES.filter((c) => c.id !== "all").map((cat) => ({
     category: cat,
@@ -131,6 +140,7 @@ export default function ProductGrid() {
                   fill
                   sizes="100vw"
                   className="object-cover"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 {selectedItem.isPopular && (
